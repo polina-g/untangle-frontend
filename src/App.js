@@ -1,5 +1,5 @@
 import './App.css';
-import {Route, Switch } from 'react-router-dom';
+import {Route, Switch, Redirect } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Nav from './components/Nav';
 import Landing from './pages/Landing'
@@ -10,6 +10,9 @@ import NewEntry from './pages/NewEntry';
 import ViewEntry from './pages/ViewEntry';
 import EditEntry from './pages/EditEntry';
 import AllEntries from './pages/allEntries';
+import Footer from './components/Footer' 
+
+import { auth } from './services/firebase';
 const {REACT_APP_BASE_URL} = process.env;
 
 function App() {
@@ -50,6 +53,7 @@ function App() {
           <EditEntry />
         </Route>
       </Switch>
+      <Footer />
     </div>
   );
 }
