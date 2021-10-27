@@ -16,17 +16,22 @@ import { auth } from './services/firebase';
 const {REACT_APP_BASE_URL} = process.env;
 
 function App() {
+  const [user, setUser] = useState(null);
   const [ entries, setEntries ] = useState(null)
   const getEntries = async () => {
     const data = await fetch(REACT_APP_BASE_URL).then(response => response.json());
     setEntries(data);
   }
 
-  useEffect(() => getEntries, []);
+  useEffect(() => {
+    getEntries();
+    const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
+    return () => unsubscribe();
+  }, []);
 
   return (
     <div className="App">
-      <Nav />
+      <Nav user={user}/>
       <Switch>
         <Route exact path="/">
           <Landing />
@@ -37,9 +42,9 @@ function App() {
         <Route path="/register">
           <CreateAccount />
         </Route>
-        <Route path="/dashboard">
-          <Dashboard data={entries}/>
-        </Route>
+        <Route path="/dashboard" render={() => (
+          user ? <Dashboard data={entries}/> : <Redirect to="/login" />
+          )} />
         <Route exact path="/entries">
           <AllEntries />
         </Route>
@@ -59,3 +64,5 @@ function App() {
 }
 
 export default App;
+
+

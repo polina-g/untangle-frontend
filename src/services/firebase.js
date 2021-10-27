@@ -15,17 +15,17 @@ firebase.initializeApp(firebaseConfig);
 const provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
-function login() {
+function signIn() {
     auth.signInWithPopup(provider);
 }
 
-function logout() {
+function logOut() {
     auth.signOut();
 }
 
 export {
     auth,
-    login,
-    logout,
+    signIn,
+    logOut,
 }
 
