@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const StyledHeader = styled.nav`
+const StyledHeader = styled.nav`
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,9 +34,28 @@ export const StyledHeader = styled.nav`
     }
 `;
 
-export const StyledMain = styled.main`
+const StyledMain = styled.main`
     flex-grow: 1;
     display: flex;
     justify-content: center;
     align-items: center;    
 `;
+
+const StyledDashBoardTop = styled.section`
+    margin: 50px 60px 20px 60px;
+    display: flex;
+    justify-content: space-around;
+`;
+
+const StyledDashBox = styled.div`
+    border: 1px solid black;
+    width: 300px;
+    height: 300px; 
+`;
+
+export {
+    StyledHeader,
+    StyledMain,
+    StyledDashBoardTop,
+    StyledDashBox
+}

@@ -24,7 +24,9 @@ function App() {
   }
 
   useEffect(() => {
+    console.log('i am here');
     getEntries();
+    console.log(user);
     const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
     return () => unsubscribe();
   }, []);
