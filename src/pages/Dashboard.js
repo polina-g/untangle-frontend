@@ -22,11 +22,17 @@ const Dashboard = ({data}) => {
         {
           data.map(entry => {
             const { createdAt, feeling, emotion, thought } = entry;
+            const date = new Date(createdAt);
+            const formattedDate = new Intl.DateTimeFormat('en', {
+              timeStyle: 'short',
+              dateStyle: 'short'
+            }).format(date);
+
             return (
               <tr>
                 <td>
                   <Link to={`/entries/${entry._id}`}>
-                    {createdAt}
+                    {formattedDate}
                   </Link>
                 </td>
                 <td>{feeling}</td>
