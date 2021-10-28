@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react/cjs/react.development';
 
 
-const Dashboard = ({data}, clients, createClient) => {
+const Dashboard = ({data, createClient}) => {
   const [formState, setFormState] = useState({
     acct: '',
     f_name: '',

@@ -16,29 +16,38 @@ import { auth } from './services/firebase';
 const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL} = process.env;
 
 function App() {
+  console.log("APP.js rendered")
   const [user, setUser] = useState(null);
-  const [clients, setClients ] = useState([])
-  const [ entries, setEntries ] = useState(null)
+  const [ clients, setClients ] = useState([])
+  const [ entries, setEntries ] = useState([])
 
   //Get data
   const getEntries = async () => {
-    const data = await fetch(REACT_APP_BASE_URL).then(response => response.json());
+    console.log('rendering getEntries');
+    const response = await fetch(REACT_APP_BASE_URL);
+    const data = await response.json();
     setEntries(data);
   }
 
   //Contacts helper functions
   const getClients = async() => {
+    console.log('rendering getClients');
     //get a secure id token from our firebase user
+    console.log('user in getClients ', user);
+    if(!user) return;
     const token = await user.getIdToken();
     console.log(token);
-
+    console.log(REACT_APP_CLIENT_URL);
 
     const response = await fetch (REACT_APP_CLIENT_URL, {
+        method: 'GET',
         headers: {
           'Authorization': 'Bearer' + token
         }
-    })
-    const client = await response.json();
+    });
+
+    console.log('response after client fetch ', response);
+    const clients = await response.json();
     setClients(clients)
   }
 
@@ -53,9 +62,12 @@ function App() {
   }
 
   useEffect(() => {
-    getEntries();
-    getClients();
+    console.log('refresh');
+    console.log('user before auth ', user);
     const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
+    console.log('user after auth ', user);
+    getClients();
+    getEntries();
     return () => unsubscribe();
   }, []);
 
@@ -75,7 +87,6 @@ function App() {
         <Route path="/dashboard" render={() => (
           user ? <Dashboard 
                     data={entries} 
-                    clients={clients} 
                     createClient={createClient}
                   /> : <Redirect to="/login" />
           )} />
