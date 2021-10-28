@@ -28,15 +28,26 @@ function App() {
 
   //Contacts helper functions
   const getClients = async() => {
-    const clients = await fetch (REACT_APP_CLIENT_URL).then(response => response.json());
+    //get a secure id token from our firebase user
+    const token = await user.getIdToken();
+    console.log(token);
+
+
+    const response = await fetch (REACT_APP_CLIENT_URL, {
+        headers: {
+          'Authorization': 'Bearer' + token
+        }
+    })
+    const client = await response.json();
     setClients(clients)
   }
 
   const createClient = async (person) => {
+    const data = {...person, managedBy: user.uid};
     await fetch(REACT_APP_CLIENT_URL, {
       method: 'POST',
       headers: {'Content-tyoe': 'Application/json'},
-      body: JSON.stringify(person)
+      body: JSON.stringify(data)
     })
     getClients();
   }
