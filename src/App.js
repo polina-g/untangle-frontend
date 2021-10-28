@@ -9,24 +9,41 @@ import Dashboard from './pages/Dashboard';
 import NewEntry from './pages/NewEntry';
 import ViewEntry from './pages/ViewEntry';
 import EditEntry from './pages/EditEntry';
-import AllEntries from './pages/allEntries';
+import AllEntries from './pages/AllEntries';
 import Footer from './components/Footer' 
 
 import { auth } from './services/firebase';
-const {REACT_APP_BASE_URL} = process.env;
+const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL} = process.env;
 
 function App() {
   const [user, setUser] = useState(null);
+  const [clients, setClients ] = useState([])
   const [ entries, setEntries ] = useState(null)
+
+  //Get data
   const getEntries = async () => {
     const data = await fetch(REACT_APP_BASE_URL).then(response => response.json());
     setEntries(data);
   }
 
+  //Contacts helper functions
+  const getClients = async() => {
+    const clients = await fetch (REACT_APP_CLIENT_URL).then(response => response.json());
+    setClients(clients)
+  }
+
+  const createClient = async (person) => {
+    await fetch(REACT_APP_CLIENT_URL, {
+      method: 'POST',
+      headers: {'Content-tyoe': 'Application/json'},
+      body: JSON.stringify(person)
+    })
+    getClients();
+  }
+
   useEffect(() => {
-    console.log('i am here');
     getEntries();
-    console.log(user);
+    getClients();
     const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
     return () => unsubscribe();
   }, []);
@@ -45,7 +62,11 @@ function App() {
           <CreateAccount />
         </Route>
         <Route path="/dashboard" render={() => (
-          user ? <Dashboard data={entries}/> : <Redirect to="/login" />
+          user ? <Dashboard 
+                    data={entries} 
+                    clients={clients} 
+                    createClient={createClient}
+                  /> : <Redirect to="/login" />
           )} />
         <Route exact path="/entries">
           <AllEntries />
