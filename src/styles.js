@@ -53,9 +53,14 @@ const StyledDashBox = styled.div`
     height: 300px; 
 `;
 
+const StyledTable = styled.table`
+
+`;
+
 export {
     StyledHeader,
     StyledMain,
     StyledDashBoardTop,
-    StyledDashBox
+    StyledDashBox,
+    StyledTable
 }
