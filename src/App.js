@@ -34,6 +34,7 @@ function App() {
     console.log('rendering getClients');
     //get a secure id token from our firebase user
     console.log('user in getClients ', user);
+    console.log(!user);
     if(!user) return;
     const token = await user.getIdToken();
     console.log(token);
@@ -42,7 +43,7 @@ function App() {
     const response = await fetch (REACT_APP_CLIENT_URL, {
         method: 'GET',
         headers: {
-          'Authorization': 'Bearer' + token
+          'Authorization': 'Bearer ' + token
         }
     });
 
@@ -63,13 +64,11 @@ function App() {
 
   useEffect(() => {
     console.log('refresh');
-    console.log('user before auth ', user);
     const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
-    console.log('user after auth ', user);
     getClients();
     getEntries();
     return () => unsubscribe();
-  }, []);
+  }, [user]);
 
   return (
     <div className="App">
