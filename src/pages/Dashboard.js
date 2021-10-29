@@ -12,7 +12,6 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
     l_name: '',
     email: '',
     therapist: [],
-    entry: []
   });
 
     //Form helper functions
@@ -32,7 +31,6 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
         l_name: '',
         email: '',
         therapist: [],
-        entry: []
       })
     }
   

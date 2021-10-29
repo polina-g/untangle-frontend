@@ -77,16 +77,15 @@ function App() {
     //=============== CREATE ENTRY =================
     const createEntry = async (entry) => {
       if(!user) return;
-      console.log("entry in app.js: ", entry)
+      const data = {...entry, client: user.uid};
       token = await user.getIdToken();
-      console.log('token in createEntry: ', token)
       await fetch(REACT_APP_BASE_URL, {
         method: 'POST',
         headers: {
           'Content-type': 'Application/json',
           'Authorization': 'Bearer ' + token
         },
-        body: JSON.stringify(entry)
+        body: JSON.stringify(data)
       })
       getEntries();
     }
