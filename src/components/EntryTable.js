@@ -1,7 +1,7 @@
 import { StyledTable } from '../styles';
 import { Link } from 'react-router-dom';
 
-const EntryTable = ({data, token}) => {
+const EntryTable = ({data, token, dashboard}) => {
   console.log('user token in entrytable', token);
     return (
       <section>
@@ -13,15 +13,17 @@ const EntryTable = ({data, token}) => {
           <th>Thought</th>
         </tr>
         {
-          data.map(entry => {
+          data.map((entry, index) => {
+            if (dashboard && index > 4) return;
             const { createdAt, feeling, emotion, thought } = entry;
             const date = new Date(createdAt);
             const formattedDate = new Intl.DateTimeFormat('en', {
               timeStyle: 'short',
               dateStyle: 'short'
             }).format(date);
-
+            console.log(index);
             return (
+               
               <tr>
                 <td>
                   <Link to={{

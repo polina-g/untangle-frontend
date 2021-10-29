@@ -72,7 +72,7 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
         <DashBox title="View All Entries" token={token} link="/entries"/>
         <DashBox title="Resources/Helpful Tips" link="/" token={token}/>
       </StyledDashBoardTop>
-      <EntryTable data={data} token={token}/>
+      <EntryTable data={data} token={token} dashboard/>
     </main>
     );
   };
