@@ -4,7 +4,7 @@ import { useState } from 'react/cjs/react.development';
 import EntryTable from '../components/EntryTable';
 
 
-const Dashboard = ({data, createClient, token}) => {
+const Dashboard = ({data, createClient, createEntry, token}) => {
   console.log('dashboard user token: ', token);
 
   //If No Client Created - RENDER FORM
@@ -68,7 +68,7 @@ const Dashboard = ({data, createClient, token}) => {
         </form>
       </section>
       <StyledDashBoardTop>
-        <DashBox title="New Entry" token={token} link="/entries/new"/>
+        <DashBox title="New Entry" token={token} createEntry={createEntry} link="/entries/new"/>
         <DashBox title="View All Entries" token={token} link="/entries"/>
         <DashBox title="Resources/Helpful Tips" link="/" token={token}/>
       </StyledDashBoardTop>

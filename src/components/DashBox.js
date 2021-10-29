@@ -1,11 +1,11 @@
 import { StyledDashBox } from "../styles";
 import { Link } from "react-router-dom";
 
-const DashBox = ({title, link, token}) => {
-    console.log('dashbox token: ', token);
+const DashBox = ({title, link, createEntry, token}) => {
     return (
     <Link to={{
         pathname: `${link}`,
+        createEntry: createEntry,
         state: {
             token: token
         }

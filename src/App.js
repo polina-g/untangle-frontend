@@ -22,7 +22,7 @@ function App() {
   const [ clients, setClients ] = useState([])
   const [ entries, setEntries ] = useState([])
 
-  //Get data
+  //========== GET DATA ============================
   const getEntries = async () => {
     console.log('rendering getEntries');
     if(!user) return;
@@ -36,8 +36,8 @@ function App() {
     const data = await response.json();
     setEntries(data);
   }
-
-  //Contacts helper functions
+  
+  //======= CLIENT CREATE/SET STATE FUNCTIONS======= 
   const getClients = async() => {
     console.log('rendering getClients');
     //get a secure id token from our firebase user
@@ -74,6 +74,23 @@ function App() {
     getClients();
   }
 
+    //=============== CREATE ENTRY =================
+    const createEntry = async (entry) => {
+      if(!user) return;
+      console.log("entry in app.js: ", entry)
+      token = await user.getIdToken();
+      console.log('token in createEntry: ', token)
+      await fetch(REACT_APP_BASE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'Application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(entry)
+      })
+      getEntries();
+    }
+
   useEffect(() => {
     console.log('refresh');
     const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
@@ -99,6 +116,7 @@ function App() {
           user ? <Dashboard 
                     data={entries} 
                     createClient={createClient}
+                    createEntry={createEntry}
                     token={token}
                   /> : <Redirect to="/login" />
           )} />

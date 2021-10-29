@@ -1,7 +1,7 @@
-const EntryForm = ({handleChange, handleSumbit, formState}) => {
+const EntryForm = ({handleChange, handleSubmit, formState}) => {
     return (
-    <form onSubmit={handleSumbit}>
-      <p>Hoe are you feeling?</p>
+    <form onSubmit={handleSubmit}>
+      <p>How are you feeling?</p>
       <label for="feeling">1</label>
       <input 
         value="1"

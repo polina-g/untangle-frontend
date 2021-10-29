@@ -6,7 +6,7 @@ const { REACT_APP_BASE_URL } = process.env;
 const NewEntry = () => {
   //Get token
   const location = useLocation();
-  let token = location.state.token;
+  const createEntry = location.createEntry;
 
   //Set form state
   const [formState, setFormState] = useState({
@@ -22,6 +22,17 @@ const NewEntry = () => {
   //Form helper functions
   const handleSubmit = (event) => {
     event.preventDefault();
+    console.log('Form state in new entry page: ', formState);
+    createEntry(formState);
+    setFormState({
+      feeling: 0,
+      emotion: '',
+      intensity: 0,
+      thought: '',
+      rob: 0,
+      situation: '',
+      private: false
+    });
   }
 
   const handleChange = (event) => {
@@ -29,13 +40,12 @@ const NewEntry = () => {
     ? event.target.checked 
     : event.target.value
 
-    console.log(value)
-
     setFormState((prevState) => ({
       ...prevState,
       [event.target.name]: value 
-    }))
-  }
+    }));
+  };
+
     return (
     <main>
       <h1>NewEntry</h1>
