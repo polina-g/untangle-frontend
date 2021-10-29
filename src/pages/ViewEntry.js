@@ -31,20 +31,28 @@ const ViewEntry = () => {
     setEntry(data);
   };
 
+  const loading = () => {
+    return (<h1>Loading...</h1>);
+  }
+
+  const loaded = () => {
+    return (
+      <main>
+        <h1>{entry.formattedDate}</h1>
+        <h1>{entry.feeling}</h1>
+        <h1>{entry.emotion} | {entry.intensity}</h1>
+        <h1>{entry.thought} | {entry.rob}</h1>
+        <p>{entry.situation}</p>
+      </main>
+    )
+  }
+
   useEffect(() => {
     console.log('this is useEffect');
     getEntry();
   }, []);
 
-  return (
-    <main>
-      <h1>{entry ? entry.formattedDate : ''}</h1>
-      <h1>{entry ? entry.feeling : ''}</h1>
-      <h1>{entry ? entry.emotion : ''} | {entry ? entry.intensity : ''}</h1>
-      <h1>{entry ? entry.thought : ''} | {entry ? entry.rob : ''}</h1>
-      <p>{entry ? entry.situation : ''}</p>
-    </main>
-  )
+  return entry ? loaded() : loading();
 };
 
   export default ViewEntry;
