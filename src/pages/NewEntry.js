@@ -25,9 +25,15 @@ const NewEntry = () => {
   }
 
   const handleChange = (event) => {
+    const value = event.target.name === 'private' 
+    ? event.target.checked 
+    : event.target.value
+
+    console.log(value)
+
     setFormState((prevState) => ({
       ...prevState,
-      [event.target.name]: event.target.value 
+      [event.target.name]: value 
     }))
   }
     return (

@@ -1,11 +1,41 @@
-const JournalEntryForm = ({handleChange, handleSumbit, formState}) => {
+const EntryForm = ({handleChange, handleSumbit, formState}) => {
     return (
     <form onSubmit={handleSumbit}>
-      <input
+      <p>Hoe are you feeling?</p>
+      <label for="feeling">1</label>
+      <input 
+        value="1"
         onChange={handleChange}
-        value={formState.feeling}
         name="feeling"
-        type="number"
+        type="radio"
+      />
+      <label for="feeling">2</label>
+      <input 
+        value="2"
+        onChange={handleChange}
+        name="feeling"
+        type="radio"
+      />
+      <label for="feeling">3</label>
+      <input 
+        value="3"
+        onChange={handleChange}
+        name="feeling"
+        type="radio"
+      />
+      <label for="feeling">4</label>
+      <input 
+        value="4"
+        onChange={handleChange}
+        name="feeling"
+        type="radio"
+      />
+      <label for="feeling">5</label>
+      <input 
+        value="5"
+        onChange={handleChange}
+        name="feeling"
+        type="radio"
       />
       <input
         onChange={handleChange}
@@ -14,11 +44,14 @@ const JournalEntryForm = ({handleChange, handleSumbit, formState}) => {
         type="text"
         placeholder="Emotion"
       />
+      <label for="intensity">Intensity</label>
       <input
         onChange={handleChange}
         value={formState.intensity}
         name="intensity"
-        type="number"
+        type="range"
+        min="0"
+        max="100"
       />
       <input
         onChange={handleChange}
@@ -27,23 +60,26 @@ const JournalEntryForm = ({handleChange, handleSumbit, formState}) => {
         type="text"
         placeholder="Thought"
       />
+      <label for="rob">Rate of Belief</label>
       <input
         onChange={handleChange}
         value={formState.rob}
         name="rob"
-        type="number"
+        type="range"
+        min="0"
+        max="100"
       />
       <textarea
         onChange={handleChange}
         value={formState.situation}
-        name="intensity"
+        name="situation"
         placeholder="situation"
       />
       <input
         onChange={handleChange}
-        value={formState.private}
         name="private"
         type="checkbox"
+        checked={formState.private}
       />
       <label for="private">Mark Private</label>
       <input type="submit" value="Add entry"/>
@@ -51,4 +87,4 @@ const JournalEntryForm = ({handleChange, handleSumbit, formState}) => {
     );
   };
 
-  export default JournalEntryForm;
+  export default EntryForm;
