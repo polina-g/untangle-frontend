@@ -43,6 +43,7 @@ function App() {
     //get a secure id token from our firebase user
     console.log('user in getClients ', user);
     if(!user) return;
+
     token = await user.getIdToken();
     console.log('token: ', token);
 
@@ -59,10 +60,15 @@ function App() {
   }
 
   const createClient = async (person) => {
+    if(!user) return;
     const data = {...person, managedBy: user.uid};
+    token = await user.getIdToken();
     await fetch(REACT_APP_CLIENT_URL, {
       method: 'POST',
-      headers: {'Content-type': 'Application/json'},
+      headers: {
+        'Content-type': 'Application/json',
+        'Authorization': 'Bearer ' + token
+      },
       body: JSON.stringify(data)
     })
     getClients();

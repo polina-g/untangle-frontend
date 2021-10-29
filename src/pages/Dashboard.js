@@ -6,8 +6,10 @@ import EntryTable from '../components/EntryTable';
 
 const Dashboard = ({data, createClient, token}) => {
   console.log('dashboard user token: ', token);
+
+  //If No Client Created - RENDER FORM
   const [formState, setFormState] = useState({
-    acct: '',
+    acct: 'client',
     f_name: '',
     l_name: '',
     email: '',
@@ -27,7 +29,7 @@ const Dashboard = ({data, createClient, token}) => {
       event.preventDefault();
       createClient(formState);
       setFormState({
-        acct: '',
+        acct: 'client',
         f_name: '',
         l_name: '',
         email: '',
@@ -40,24 +42,27 @@ const Dashboard = ({data, createClient, token}) => {
     <main>
       <h1>Dashboard</h1>
       <section>
-        <form>
+        <form onSubmit={handleSumbit}>
           <input
             onChange={handleChange}
             value={formState.f_name}
             name="f_name"
             type="text"
+            placeholder="First Name"
           />
           <input
             onChange={handleChange}
             value={formState.l_name}
             name="l_name"
             type="text"
+            placeholder="Last Name"
           />
           <input
             onChange={handleChange}
             value={formState.email}
             name="email"
             type="email"
+            placeholder="E-mail"
           />
           <input type="submit" value="Create Profile"/>
         </form>
