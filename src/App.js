@@ -24,7 +24,14 @@ function App() {
   //Get data
   const getEntries = async () => {
     console.log('rendering getEntries');
-    const response = await fetch(REACT_APP_BASE_URL);
+    if(!user) return;
+    const token = await user.getIdToken();
+    const response = await fetch(REACT_APP_BASE_URL, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
     const data = await response.json();
     setEntries(data);
   }
@@ -34,11 +41,9 @@ function App() {
     console.log('rendering getClients');
     //get a secure id token from our firebase user
     console.log('user in getClients ', user);
-    console.log(!user);
     if(!user) return;
     const token = await user.getIdToken();
-    console.log(token);
-    console.log(REACT_APP_CLIENT_URL);
+    console.log('token: ', token);
 
     const response = await fetch (REACT_APP_CLIENT_URL, {
         method: 'GET',
@@ -56,7 +61,7 @@ function App() {
     const data = {...person, managedBy: user.uid};
     await fetch(REACT_APP_CLIENT_URL, {
       method: 'POST',
-      headers: {'Content-tyoe': 'Application/json'},
+      headers: {'Content-type': 'Application/json'},
       body: JSON.stringify(data)
     })
     getClients();
@@ -87,6 +92,7 @@ function App() {
           user ? <Dashboard 
                     data={entries} 
                     createClient={createClient}
+                    user={user}
                   /> : <Redirect to="/login" />
           )} />
         <Route exact path="/entries">
