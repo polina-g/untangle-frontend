@@ -20,6 +20,14 @@ const ViewEntry = () => {
     });
     console.log('this is response ', response);
     const data = await response.json();
+    console.log('this is data', data);
+
+    const date = new Date(data.createdAt);
+    const formattedDate = new Intl.DateTimeFormat('en', {
+      dateStyle: 'short'
+    }).format(date);
+    data.formattedDate = formattedDate;
+
     setEntry(data);
   };
 
@@ -28,18 +36,13 @@ const ViewEntry = () => {
     getEntry();
   }, []);
 
-  const date = new Date(entry.createdAt);
-  const formattedDate = new Intl.DateTimeFormat('en', {
-    dateStyle: 'short'
-  }).format(date);
-
   return (
     <main>
-      <h1>{formattedDate}</h1>
-      <h1>{entry.feeling}</h1>
-      <h1>{entry.emotion} | {entry.intensity}</h1>
-      <h1>{entry.thought} | {entry.rob}</h1>
-      <p>{entry.situation}</p>
+      <h1>{entry ? entry.formattedDate : ''}</h1>
+      <h1>{entry ? entry.feeling : ''}</h1>
+      <h1>{entry ? entry.emotion : ''} | {entry ? entry.intensity : ''}</h1>
+      <h1>{entry ? entry.thought : ''} | {entry ? entry.rob : ''}</h1>
+      <p>{entry ? entry.situation : ''}</p>
     </main>
   )
 };
