@@ -4,8 +4,8 @@ import { useState } from 'react/cjs/react.development';
 import EntryTable from '../components/EntryTable';
 
 
-const Dashboard = ({data, createClient, user}) => {
-  console.log('dashboard user: ', user);
+const Dashboard = ({data, createClient, token}) => {
+  console.log('dashboard user token: ', token);
   const [formState, setFormState] = useState({
     acct: '',
     f_name: '',
@@ -67,7 +67,7 @@ const Dashboard = ({data, createClient, user}) => {
         <DashBox title="View All Entries" link="/entries"/>
         <DashBox title="Resources/Helpful Tips" link="/"/>
       </StyledDashBoardTop>
-      <EntryTable data={data} user={user}/>
+      <EntryTable data={data} token={token}/>
     </main>
     );
   };

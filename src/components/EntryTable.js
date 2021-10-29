@@ -1,8 +1,8 @@
 import { StyledTable } from '../styles';
 import { Link } from 'react-router-dom';
 
-const EntryTable = ({data, user}) => {
-  console.log('user in entrytable', user);
+const EntryTable = ({data, token}) => {
+  console.log('user token in entrytable', token);
     return (
       <section>
         <StyledTable>
@@ -27,7 +27,7 @@ const EntryTable = ({data, user}) => {
                   <Link to={{
                     pathname: `/entries/${entry._id}`,
                     state: {
-                      user: user
+                      token: token
                     }
                   }}>
                     {formattedDate}

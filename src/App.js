@@ -14,6 +14,7 @@ import Footer from './components/Footer'
 
 import { auth } from './services/firebase';
 const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL} = process.env;
+let token;
 
 function App() {
   console.log("APP.js rendered")
@@ -25,7 +26,7 @@ function App() {
   const getEntries = async () => {
     console.log('rendering getEntries');
     if(!user) return;
-    const token = await user.getIdToken();
+    token = await user.getIdToken();
     const response = await fetch(REACT_APP_BASE_URL, {
       method: 'GET',
       headers: {
@@ -42,7 +43,7 @@ function App() {
     //get a secure id token from our firebase user
     console.log('user in getClients ', user);
     if(!user) return;
-    const token = await user.getIdToken();
+    token = await user.getIdToken();
     console.log('token: ', token);
 
     const response = await fetch (REACT_APP_CLIENT_URL, {
@@ -92,7 +93,7 @@ function App() {
           user ? <Dashboard 
                     data={entries} 
                     createClient={createClient}
-                    user={user}
+                    token={token}
                   /> : <Redirect to="/login" />
           )} />
         <Route exact path="/entries">
