@@ -36,7 +36,7 @@ function App() {
     const data = await response.json();
     setEntries(data);
   }
-  
+
   //======= CLIENT CREATE/SET STATE FUNCTIONS======= 
   const getClients = async() => {
     console.log('rendering getClients');
@@ -101,7 +101,11 @@ function App() {
 
   return (
     <div className="App">
-      <Nav user={user}/>
+      <Nav 
+        user={user} 
+        data={entries}
+        createEntry={createEntry}
+        token={token} />
       <Switch>
         <Route exact path="/">
           <Landing />
@@ -113,12 +117,14 @@ function App() {
           <CreateAccount />
         </Route>
         <Route path="/dashboard" render={() => (
-          user ? <Dashboard 
-                    data={entries} 
-                    createClient={createClient}
-                    createEntry={createEntry}
-                    token={token}
-                  /> : <Redirect to="/login" />
+          user ? 
+            <Dashboard 
+              data={entries} 
+              createClient={createClient}
+              createEntry={createEntry}
+              token={token}
+            /> : 
+            <Redirect to="/login" />
           )} />
         <Route exact path="/entries">
           <AllEntries />
