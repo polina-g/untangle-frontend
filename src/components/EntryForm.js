@@ -2,35 +2,35 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
     return (
     <form onSubmit={handleSubmit}>
       <p>How are you feeling?</p>
-      <label for="feeling">1</label>
+      <label htmlFor="feeling">1</label>
       <input 
         value="1"
         onChange={handleChange}
         name="feeling"
         type="radio"
       />
-      <label for="feeling">2</label>
+      <label htmlFor="feeling">2</label>
       <input 
         value="2"
         onChange={handleChange}
         name="feeling"
         type="radio"
       />
-      <label for="feeling">3</label>
+      <label htmlFor="feeling">3</label>
       <input 
         value="3"
         onChange={handleChange}
         name="feeling"
         type="radio"
       />
-      <label for="feeling">4</label>
+      <label htmlFor="feeling">4</label>
       <input 
         value="4"
         onChange={handleChange}
         name="feeling"
         type="radio"
       />
-      <label for="feeling">5</label>
+      <label htmlFor="feeling">5</label>
       <input 
         value="5"
         onChange={handleChange}
@@ -44,7 +44,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
         type="text"
         placeholder="Emotion"
       />
-      <label for="intensity">Intensity</label>
+      <label HTMLfor="intensity">Intensity</label>
       <input
         onChange={handleChange}
         value={formState.intensity}
@@ -60,7 +60,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
         type="text"
         placeholder="Thought"
       />
-      <label for="rob">Rate of Belief</label>
+      <label HTMLfor="rob">Rate of Belief</label>
       <input
         onChange={handleChange}
         value={formState.rob}
@@ -81,7 +81,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
         type="checkbox"
         checked={formState.private}
       />
-      <label for="private">Mark Private</label>
+      <label HTMLfor="private">Mark Private</label>
       <input type="submit" value="Add entry"/>
     </form>
     );

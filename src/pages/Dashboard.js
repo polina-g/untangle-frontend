@@ -5,8 +5,6 @@ import EntryTable from '../components/EntryTable';
 
 
 const Dashboard = ({data, createClient, createEntry, token}) => {
-  console.log('dashboard user token: ', token);
-
   //If No Client Created - RENDER FORM
   const [formState, setFormState] = useState({
     acct: 'client',
@@ -69,7 +67,7 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
       </section>
       <StyledDashBoardTop>
         <DashBox title="New Entry" token={token} createEntry={createEntry} link="/entries/new"/>
-        <DashBox title="View All Entries" token={token} link="/entries"/>
+        <DashBox title="View All Entries" token={token} data={data} link="/entries"/>
         <DashBox title="Resources/Helpful Tips" link="/" token={token}/>
       </StyledDashBoardTop>
       <EntryTable data={data} token={token} dashboard/>

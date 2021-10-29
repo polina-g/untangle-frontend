@@ -1,5 +1,15 @@
+import EntryTable from "../components/EntryTable";
+import { useLocation } from "react-router";
+
 const AllEntries = (props) => {
-    return <h1>All Entries</h1>;
+  const location = useLocation();
+  const data = location.data;
+    return (
+    <main>
+      <h1>All entries</h1>  
+      <EntryTable data={data}/>
+    </main>
+    );
   };
 
   export default AllEntries;
