@@ -68,9 +68,9 @@ const Dashboard = ({data, createClient, token}) => {
         </form>
       </section>
       <StyledDashBoardTop>
-        <DashBox title="New Entry" link="/entries/new"/>
-        <DashBox title="View All Entries" link="/entries"/>
-        <DashBox title="Resources/Helpful Tips" link="/"/>
+        <DashBox title="New Entry" token={token} link="/entries/new"/>
+        <DashBox title="View All Entries" token={token} link="/entries"/>
+        <DashBox title="Resources/Helpful Tips" link="/" token={token}/>
       </StyledDashBoardTop>
       <EntryTable data={data} token={token}/>
     </main>
