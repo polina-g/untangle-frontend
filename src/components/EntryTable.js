@@ -4,16 +4,21 @@ import { useState } from 'react';
 
 const EntryTable = ({data, token, dashboard}) => {
   const [entries, setEntries] = useState(data);
-  return (
-    <section>
+  const loading = () => {
+    return <h1>Loading</h1>
+  }
+
+  const loaded = () => {
+    return (
+      <section>
       <StyledTable>
       <thead>
-        <tr>
-          <th>Date</th>
-          <th>Feeling</th>
-          <th>Emotion</th>
-          <th>Thought</th>
-        </tr>
+          <tr>
+            <th>Date</th>
+            <th>Feeling</th>
+            <th>Emotion</th>
+            <th>Thought</th>
+          </tr>
       </thead>
       <tbody>
       {
@@ -46,9 +51,12 @@ const EntryTable = ({data, token, dashboard}) => {
         })
       }
       </tbody>
-    </StyledTable>
-  </section>
-  )
+      </StyledTable>
+    </section>
+    );
+  };
+
+    return entries ? loaded() : loading()
   };
 
   export default EntryTable;

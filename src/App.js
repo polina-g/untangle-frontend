@@ -37,7 +37,7 @@ function App() {
     setEntries(data);
   }
 
-  //======= CLIENT CREATE/SET STATE FUNCTIONS======= 
+  //====================== CLIENT FUNCTIONS======================= 
   const getClients = async() => {
     console.log('rendering getClients');
     //get a secure id token from our firebase user
@@ -73,6 +73,18 @@ function App() {
     })
     getClients();
   }
+
+  const checkIfClient = async () => {
+    if(!user) return;
+    token = await user.getIdToken();
+    const foundClient = await fetch(REACT_APP_CLIENT_URL+'/client', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+    return foundClient;
+  };
 
     //=============== CREATE ENTRY =================
     const createEntry = async (entry) => {
@@ -122,6 +134,7 @@ function App() {
               createClient={createClient}
               createEntry={createEntry}
               token={token}
+              checkIfClient = {checkIfClient}
             /> : 
             <Redirect to="/login" />
           )} />
