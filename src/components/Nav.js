@@ -1,6 +1,5 @@
 import { Link } from 'react-router-dom';
 import { logOut } from '../services/firebase'
-import { Redirect } from 'react-router';
 import { StyledHeader } from '../styles';
 
 const Nav = ({user, token, data, createEntry}) => {

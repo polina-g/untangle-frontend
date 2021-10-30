@@ -1,6 +1,6 @@
 import './App.css';
 import {Route, Switch, Redirect } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Landing from './pages/Landing'
 import Login from './pages/Login'
@@ -17,9 +17,9 @@ const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL} = process.env;
 let token;
 
 function App() {
-  console.log("APP.js rendered")
-  const [user, setUser] = useState(null);
+  const [ user, setUser ] = useState(null);
   const [ entries, setEntries ] = useState([])
+  const fetchData = useRef(null);
 
   //========== GET DATA ============================
   const getEntries = async () => {
@@ -66,12 +66,22 @@ function App() {
       getEntries();
     }
 
-  useEffect(() => {
-    console.log('refresh');
-    const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
-    getEntries();
-    return () => unsubscribe();
-  }, [user]);
+    useEffect(() => {
+      fetchData.current = getEntries
+    });
+
+    useEffect(() => {
+      const unsubscribe = auth.onAuthStateChanged(user => {
+        setUser(user)
+        if(user) {
+          fetchData.current();
+        } else {
+          setEntries([]);
+        }
+      });
+
+      return () => unsubscribe();
+    }, [user]);
 
   return (
     <div className="App">
@@ -97,6 +107,7 @@ function App() {
               createClient={createClient}
               createEntry={createEntry}
               token={token}
+              user={user}
             /> : 
             <Redirect to="/login" />
           )} />

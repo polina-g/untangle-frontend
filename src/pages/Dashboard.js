@@ -10,8 +10,7 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
   const [response, setResponse] = useState(null);
 
   const checkIfClient = async () => {
-    console.log('This is checkIfClient');
-    console.log('token', token);
+    console.log('ASYNC -> checkIfClient');
     const response = await fetch(REACT_APP_CLIENT_URL+'/client', {
       method: 'GET',
       headers: {
@@ -19,6 +18,7 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
       }
     });
     response.json().then(foundClient => {
+      console.log('checkIfClient Response Went Through');
       console.log('this is found CLient ', foundClient);
       setResponse('true');
       setClient(foundClient);
@@ -26,8 +26,9 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
   };
 
   useEffect(() => {
+    console.log('useEffect -> load checkIfClient');
     checkIfClient();
-  }, []);
+  }, [token]);
 
   const loading = () => {
     return <h1>Loading...</h1>;

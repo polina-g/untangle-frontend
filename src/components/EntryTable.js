@@ -23,7 +23,7 @@ const EntryTable = ({data, token, dashboard}) => {
       <tbody>
       {
         entries.map((entry, index) => {
-          if (dashboard && index > 4) return;
+          if (dashboard && index > 4) return null;
           const { createdAt, feeling, emotion, thought } = entry;
           const date = new Date(createdAt);
           const formattedDate = new Intl.DateTimeFormat('en', {

@@ -38,8 +38,8 @@ const StyledMain = styled.main`
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;    
+    align-items: center;
+    padding-top: 3rem;
 `;
 
 const StyledDashBoardTop = styled.section`
@@ -55,7 +55,13 @@ const StyledDashBox = styled.div`
 `;
 
 const StyledTable = styled.table`
-
+    th, td {
+        text-align: left;
+        padding: 5px;
+    }
+    tr:nth-child(even) {
+        background-color:lightcyan;
+    }
 `;
 
 export {
