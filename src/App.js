@@ -19,12 +19,10 @@ let token;
 function App() {
   console.log("APP.js rendered")
   const [user, setUser] = useState(null);
-  const [ clients, setClients ] = useState([])
   const [ entries, setEntries ] = useState([])
 
   //========== GET DATA ============================
   const getEntries = async () => {
-    console.log('rendering getEntries');
     if(!user) return;
     token = await user.getIdToken();
     const response = await fetch(REACT_APP_BASE_URL, {
@@ -38,27 +36,6 @@ function App() {
   }
 
   //====================== CLIENT FUNCTIONS======================= 
-  const getClients = async() => {
-    console.log('rendering getClients');
-    //get a secure id token from our firebase user
-    console.log('user in getClients ', user);
-    if(!user) return;
-
-    token = await user.getIdToken();
-    console.log('token: ', token);
-
-    const response = await fetch (REACT_APP_CLIENT_URL, {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-    });
-
-    console.log('response after client fetch ', response);
-    const clients = await response.json();
-    setClients(clients)
-  }
-
   const createClient = async (person) => {
     if(!user) return;
     const data = {...person, managedBy: user.uid};
@@ -71,20 +48,7 @@ function App() {
       },
       body: JSON.stringify(data)
     })
-    getClients();
   }
-
-  const checkIfClient = async () => {
-    if(!user) return;
-    token = await user.getIdToken();
-    const foundClient = await fetch(REACT_APP_CLIENT_URL+'/client', {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    });
-    return foundClient;
-  };
 
     //=============== CREATE ENTRY =================
     const createEntry = async (entry) => {
@@ -105,7 +69,6 @@ function App() {
   useEffect(() => {
     console.log('refresh');
     const unsubscribe = auth.onAuthStateChanged(user => setUser(user));
-    getClients();
     getEntries();
     return () => unsubscribe();
   }, [user]);
@@ -121,9 +84,9 @@ function App() {
         <Route exact path="/">
           <Landing />
         </Route>
-        <Route path="/login">
-          <Login />
-        </Route>
+        <Route path="/login" render={() => (
+            user ? <Redirect to="/dashboard" /> : <Login />
+          )} />
         <Route path="/register">
           <CreateAccount />
         </Route>
@@ -134,7 +97,6 @@ function App() {
               createClient={createClient}
               createEntry={createEntry}
               token={token}
-              checkIfClient = {checkIfClient}
             /> : 
             <Redirect to="/login" />
           )} />

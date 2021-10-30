@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Redirect } from "react-router";
 
 const Register = ({createClient}) => {
   const [formState, setFormState] = useState({
@@ -54,6 +55,7 @@ const Register = ({createClient}) => {
           />
           <input type="submit" value="Create Profile"/>
         </form>
+        <Redirect to="/dashboard" />
       </section>
     );
   };
