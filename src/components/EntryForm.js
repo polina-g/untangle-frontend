@@ -1,6 +1,7 @@
 import { StyledForm } from "../styles";
 
-const EntryForm = ({handleChange, handleSubmit, formState}) => {
+const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
+  console.log(formState)
     return (
     <StyledForm onSubmit={handleSubmit}>
       <p>How are you feeling?</p>
@@ -12,6 +13,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
+              checked={formState.feeling===1}
             />
           </div>
           <div className="column">
@@ -21,6 +23,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
+              checked={formState.feeling===2}
             />
           </div>
           <div className="column">
@@ -30,6 +33,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
+              checked={formState.feeling===3}
             />
           </div>
           <div className="column">
@@ -39,6 +43,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
+              checked={formState.feeling===4}
             />
           </div>
           <div className="column">
@@ -48,6 +53,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
+              checked={formState.feeling===5}
             />
           </div>
         </div>
@@ -98,7 +104,8 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
           checked={formState.private}
         />
       </div>
-      <input type="submit" value="Add entry"/>
+      <input type="submit" value={isEdit ? "Submit" : "Add Entry" }/>
+      {isEdit ? <button type="button">Cancel</button> : ''}
     </StyledForm>
     );
   };

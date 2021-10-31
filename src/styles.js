@@ -128,7 +128,7 @@ export const StyledForm = styled.form`
     input[type="radio"] {
         height: 1rem; 
     }
-    input[type="submit"] {
+    input[type="submit"], button {
         width: 100px;
         height: 50px; 
         font-size: 18px;

@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useLocation } from "react-router";
+import { useEffect } from "react/cjs/react.development";
 import EntryForm from '../components/EntryForm'
 const { REACT_APP_BASE_URL } = process.env;
 
-const NewEntry = () => {
+const NewEntry = (props) => {
   //Get token
   const location = useLocation();
   const createEntry = location.createEntry;
@@ -19,11 +20,30 @@ const NewEntry = () => {
     private: false
   });
 
+  useEffect(() => {
+    if(props.status === 'edit') {
+      setFormState(props.data)
+    }
+  })
+
   //Form helper functions
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log('Form state in new entry page: ', formState);
     createEntry(formState);
+    setFormState({
+      feeling: 0,
+      emotion: '',
+      intensity: 0,
+      thought: '',
+      rob: 0,
+      situation: '',
+      private: false
+    });
+  };
+
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    props.updateEntry(formState);
     setFormState({
       feeling: 0,
       emotion: '',
@@ -36,6 +56,7 @@ const NewEntry = () => {
   }
 
   const handleChange = (event) => {
+    console.log(event);
     const value = event.target.name === 'private' 
     ? event.target.checked 
     : event.target.value
@@ -46,10 +67,22 @@ const NewEntry = () => {
     }));
   };
 
+  const newProps = {
+    handleChange: () => handleChange(),
+    handleSumbit: () => handleSubmit(),
+    formState: formState
+  }
+
+  const editProps = {
+    hanldeChange: () => handleChange(),
+    handleSubmit: () => handleUpdate(),
+    formState: formState,
+    isEdit: true
+  }
+
     return (
     <main>
-      <h1>NewEntry</h1>
-      <EntryForm handleChange={handleChange} handleSubmit={handleSubmit} formState={formState}/>
+      <EntryForm {...(props.status ? {...editProps} : {...newProps})}/>
     </main>
     );
   };

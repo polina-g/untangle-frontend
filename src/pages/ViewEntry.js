@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import NewEntry from './NewEntry';
 const { REACT_APP_BASE_URL } = process.env;
 let token;
 
@@ -10,7 +11,8 @@ const ViewEntry = () => {
   token = location.state.token;
 
   const [ entry, setEntry ] = useState(null);
-
+  const [ action, setAction ] = useState('view')
+ 
   const getEntry = async() => {
     const response = await fetch(REACT_APP_BASE_URL+'/'+id, {
       method: 'GET',
@@ -18,15 +20,16 @@ const ViewEntry = () => {
         'Authorization': 'Bearer ' + token
       }
     });
-    
-    const data = await response.json();
 
+    const data = await response.json();
+    //Format timestamp
     const date = new Date(data.createdAt);
     const formattedDate = new Intl.DateTimeFormat('en', {
       dateStyle: 'short'
     }).format(date);
-
     data.formattedDate = formattedDate;
+
+    //Set state
     setEntry(data);
   };
 
@@ -46,15 +49,18 @@ const ViewEntry = () => {
   const loaded = () => {
     return (
       <main>
-        <h1>{entry.formattedDate}</h1>
-        <h1>{entry.feeling}</h1>
-        <h1>{entry.emotion} | {entry.intensity}</h1>
-        <h1>{entry.thought} | {entry.rob}</h1>
-        <p>{entry.situation}</p>
-        <Link to="entries/id/edit">
-          <button type="button">Edit</button>
-        </Link>
-        <button type="submit" onClick={handleDelete}>Delete</button> 
+        <section className="viewEntry">
+          <h1>{entry.formattedDate}</h1>
+          <h1>{entry.feeling}</h1>
+          <h1>{entry.emotion} | {entry.intensity}</h1>
+          <h1>{entry.thought} | {entry.rob}</h1>
+          <p>{entry.situation}</p>
+          <button type="button" onClick={() => setAction('edit')}>Edit</button>
+          <button type="button" onClick={handleDelete}>Delete</button>
+        </section>
+        <section className="editEntry">
+          <NewEntry status="edit" data={entry}/>
+        </section>
       </main>
     )
   }
