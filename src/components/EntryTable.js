@@ -18,6 +18,7 @@ const EntryTable = ({data, token, dashboard}) => {
             <th>Feeling</th>
             <th>Emotion</th>
             <th>Thought</th>
+            <th>Action</th>
           </tr>
       </thead>
       <tbody>
@@ -33,19 +34,20 @@ const EntryTable = ({data, token, dashboard}) => {
           return (            
             <tr key={index}>
               <td>
-                <Link 
+                {formattedDate}
+              </td>
+              <td>{feeling}</td>
+              <td>{emotion}</td>
+              <td>{thought}</td>
+              <Link 
                   to={{
                   pathname: `/entries/${entry._id}`,
                   state: {
                     token: token
                   }
                 }}>
-                  {formattedDate}
+                  View
                 </Link>
-              </td>
-              <td>{feeling}</td>
-              <td>{emotion}</td>
-              <td>{thought}</td>
             </tr>
           );
         })

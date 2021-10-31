@@ -1,8 +1,10 @@
+import { StyledFooter } from '../styles';
+
 const Footer = (props) => {
-    return(
-        <header>
-            <h1>Footer</h1>
-        </header>
+    return (
+        <StyledFooter>
+            <p>Copyright &copy; {new Date().getFullYear()} Untsngle. All Rights Reserved. Developed By: Polina Gorbunova</p>
+        </StyledFooter>
     );
 };
 

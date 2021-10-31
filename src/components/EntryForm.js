@@ -1,42 +1,56 @@
+import { StyledForm } from "../styles";
+
 const EntryForm = ({handleChange, handleSubmit, formState}) => {
     return (
-    <form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <p>How are you feeling?</p>
-      <label htmlFor="feeling">1</label>
-      <input 
-        value="1"
-        onChange={handleChange}
-        name="feeling"
-        type="radio"
-      />
-      <label htmlFor="feeling">2</label>
-      <input 
-        value="2"
-        onChange={handleChange}
-        name="feeling"
-        type="radio"
-      />
-      <label htmlFor="feeling">3</label>
-      <input 
-        value="3"
-        onChange={handleChange}
-        name="feeling"
-        type="radio"
-      />
-      <label htmlFor="feeling">4</label>
-      <input 
-        value="4"
-        onChange={handleChange}
-        name="feeling"
-        type="radio"
-      />
-      <label htmlFor="feeling">5</label>
-      <input 
-        value="5"
-        onChange={handleChange}
-        name="feeling"
-        type="radio"
-      />
+        <div>
+          <div className="column">
+            <label htmlFor="feeling"><img src='https://i.imgur.com/kj80WQP.png'/></label>
+            <input 
+              value="1"
+              onChange={handleChange}
+              name="feeling"
+              type="radio"
+            />
+          </div>
+          <div className="column">
+            <label htmlFor="feeling"><img src='https://i.imgur.com/dPeJdMK.png' /></label>
+            <input 
+              value="2"
+              onChange={handleChange}
+              name="feeling"
+              type="radio"
+            />
+          </div>
+          <div className="column">
+            <label htmlFor="feeling"><img src='https://i.imgur.com/X3Oeeja.png'/></label>
+            <input 
+              value="3"
+              onChange={handleChange}
+              name="feeling"
+              type="radio"
+            />
+          </div>
+          <div className="column">
+            <label htmlFor="feeling"><img src='https://i.imgur.com/Wkm4rbM.png'/></label>
+            <input 
+              value="4"
+              onChange={handleChange}
+              name="feeling"
+              type="radio"
+            />
+          </div>
+          <div className="column">
+            <label htmlFor="feeling"><img src='https://i.imgur.com/9DlOwAL.png'/></label>
+            <input 
+              value="5"
+              onChange={handleChange}
+              name="feeling"
+              type="radio"
+            />
+          </div>
+        </div>
       <input
         onChange={handleChange}
         value={formState.emotion}
@@ -44,7 +58,7 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
         type="text"
         placeholder="Emotion"
       />
-      <label HTMLfor="intensity">Intensity</label>
+      <label htmlFor="intensity">Intensity</label>
       <input
         onChange={handleChange}
         value={formState.intensity}
@@ -75,15 +89,17 @@ const EntryForm = ({handleChange, handleSubmit, formState}) => {
         name="situation"
         placeholder="situation"
       />
-      <input
-        onChange={handleChange}
-        name="private"
-        type="checkbox"
-        checked={formState.private}
-      />
-      <label HTMLfor="private">Mark Private</label>
+      <div className="markPrivate">
+        <label htmlFor="private">Mark Private</label>
+        <input
+          onChange={handleChange}
+          name="private"
+          type="checkbox"
+          checked={formState.private}
+        />
+      </div>
       <input type="submit" value="Add entry"/>
-    </form>
+    </StyledForm>
     );
   };
 
