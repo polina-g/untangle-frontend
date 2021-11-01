@@ -49,15 +49,6 @@ export const StyledDashBoardTop = styled.section`
     gap: 30px;
 `;
 
-export const StyledDashBox = styled.div`
-    width: 250px;
-    height: 250px; 
-    box-shadow: 18px 8px 31px 4px #757575;
-    h2 {
-        padding: 100px 20px;
-        color: black; 
-    }
-`;
 
 export const LinkStyle = styled.div`
     a {
@@ -65,20 +56,9 @@ export const LinkStyle = styled.div`
     }
 `;
 
-export const StyledTable = styled.table`
-    width: 80%;
-    margin: 50px auto; 
-    font-size: 24px; 
-    tr{
-        border-bottom: 1px solid black;
-    }
-    th, td {
-        text-align: center;
-        padding: 5px;
-    }
-    tr:nth-child(even) {
-        background-color:lightcyan;
-    }
+export const StyledBoxLinkText = styled.p`
+    padding: 80px 15px 0 15px; 
+    margin: 0; 
 `;
 
 export const StyledFooter = styled.footer`

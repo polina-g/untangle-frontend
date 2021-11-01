@@ -1,6 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import NewEntry from './NewEntry';
+
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
+
 const { REACT_APP_BASE_URL } = process.env;
 
 const ViewEntry = ({updateEntry, deleteEntry, user}) => {
@@ -65,7 +69,13 @@ const ViewEntry = ({updateEntry, deleteEntry, user}) => {
 
 
   const loading = () => {
-    return (<h1>Loading...</h1>);
+    return (
+      <Box sx={{ width: 300 }}>
+        <Skeleton />
+        <Skeleton animation="wave" />
+        <Skeleton animation={false} />
+      </Box>
+    );
   }
 
   const loaded = () => {
