@@ -1,11 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useLocation } from "react-router";
-import { useEffect } from "react/cjs/react.development";
 import EntryForm from '../components/EntryForm'
-const { REACT_APP_BASE_URL } = process.env;
 
 const NewEntry = (props) => {
-  //Get token
   const location = useLocation();
   const createEntry = location.createEntry;
 
@@ -21,10 +18,11 @@ const NewEntry = (props) => {
   });
 
   useEffect(() => {
+    console.log('this is firing');
     if(props.status === 'edit') {
       setFormState(props.data)
     }
-  })
+  }, [])
 
   //Form helper functions
   const handleSubmit = (event) => {
@@ -56,11 +54,10 @@ const NewEntry = (props) => {
   }
 
   const handleChange = (event) => {
-    console.log(event);
     const value = event.target.name === 'private' 
     ? event.target.checked 
     : event.target.value
-
+    console.log ([event.target.name], value);
     setFormState((prevState) => ({
       ...prevState,
       [event.target.name]: value 
@@ -68,14 +65,14 @@ const NewEntry = (props) => {
   };
 
   const newProps = {
-    handleChange: () => handleChange(),
-    handleSumbit: () => handleSubmit(),
+    handleChange: handleChange,
+    handleSubmit: handleSubmit,
     formState: formState
   }
 
   const editProps = {
-    hanldeChange: () => handleChange(),
-    handleSubmit: () => handleUpdate(),
+    handleChange: handleChange,
+    handleSubmit: handleUpdate,
     formState: formState,
     isEdit: true
   }

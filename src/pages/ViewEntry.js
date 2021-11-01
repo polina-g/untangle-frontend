@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useParams, useLocation } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import NewEntry from './NewEntry';
 const { REACT_APP_BASE_URL } = process.env;
 let token;
@@ -34,11 +33,22 @@ const ViewEntry = () => {
   };
 
   const handleDelete = async () => {
-    const response = await fetch(REACT_APP_BASE_URL+'/'+id, {
+    await fetch(REACT_APP_BASE_URL+'/'+id, {
       method: 'DELETE',
       headers: {
         'Authorization': 'Bearer ' + token
       }
+    });
+  };
+
+  const updateEntry = async (entry) => {
+    await fetch(REACT_APP_BASE_URL+'/'+id, {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'Application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(entry)
     });
   };
 
@@ -59,7 +69,7 @@ const ViewEntry = () => {
           <button type="button" onClick={handleDelete}>Delete</button>
         </section>
         <section className="editEntry">
-          <NewEntry status="edit" data={entry}/>
+          <NewEntry status="edit" data={entry} updateEntry={updateEntry}/>
         </section>
       </main>
     )

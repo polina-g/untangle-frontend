@@ -1,7 +1,7 @@
 import { StyledForm } from "../styles";
 
 const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
-  console.log(formState)
+  console.log(handleChange)
     return (
     <StyledForm onSubmit={handleSubmit}>
       <p>How are you feeling?</p>
@@ -13,7 +13,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
-              checked={formState.feeling===1}
+              checked={formState.feeling===1}         
             />
           </div>
           <div className="column">

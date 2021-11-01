@@ -7,11 +7,11 @@ const DashBox = ({title, link, createEntry, token, data}) => {
         <Link to={{
             pathname: `${link}`,
             createEntry: createEntry,
-            data: data,
             state: {
-                token: token
+                token: token,
+                data: data
             }
-            }}>
+        }}>
             <StyledDashBox>
                 <h2>{title}</h2>
             </StyledDashBox>

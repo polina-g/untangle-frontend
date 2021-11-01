@@ -3,7 +3,7 @@ import { useLocation } from "react-router";
 
 const AllEntries = (props) => {
   const location = useLocation();
-  const data = location.data;
+  const data = location.state.data;
     return (
     <main>
       <h1>All entries</h1>  
