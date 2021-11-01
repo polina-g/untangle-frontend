@@ -50,7 +50,7 @@ function App() {
     })
   }
 
-    //=============== CREATE ENTRY =================
+    //=============== ENTRY FUNCTIONS=================
     const createEntry = async (entry) => {
       if(!user) return;
       const data = {...entry, client: user.uid};
@@ -66,6 +66,22 @@ function App() {
       getEntries();
     }
 
+    const updateEntry = async (entry, id) => {
+      if(!user) return;
+      const data = {...entry, client: user.uid};
+      token = await user.getIdToken();
+      await fetch(REACT_APP_BASE_URL+'/'+id, {
+        method: 'PUT',
+        headers: {
+          'Content-type': 'Application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+      })
+      getEntries();
+    }
+
+    //=================================================
     useEffect(() => {
       fetchData.current = getEntries
     });
@@ -115,10 +131,10 @@ function App() {
           <AllEntries />
         </Route>
         <Route exact path="/entries/new">
-          <NewEntry />
+          <NewEntry createEntry={createEntry} user={user}/>
         </Route>
         <Route exact path="/entries/:id">
-          <ViewEntry />
+          <ViewEntry updateEntry={updateEntry} user={user}/>
         </Route>
         <Route exact path="/entries/:id/edit">
           <EditEntry />

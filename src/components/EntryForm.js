@@ -12,8 +12,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               value="1"
               onChange={handleChange}
               name="feeling"
-              type="radio"
-              checked={formState.feeling===1}         
+              type="radio"      
             />
           </div>
           <div className="column">
@@ -23,7 +22,6 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
-              checked={formState.feeling===2}
             />
           </div>
           <div className="column">
@@ -33,7 +31,6 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
-              checked={formState.feeling===3}
             />
           </div>
           <div className="column">
@@ -43,7 +40,6 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
-              checked={formState.feeling===4}
             />
           </div>
           <div className="column">
@@ -53,7 +49,6 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               onChange={handleChange}
               name="feeling"
               type="radio"
-              checked={formState.feeling===5}
             />
           </div>
         </div>

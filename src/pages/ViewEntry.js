@@ -1,18 +1,16 @@
 import { useState, useEffect } from 'react';
-import { useParams, useLocation } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import NewEntry from './NewEntry';
 const { REACT_APP_BASE_URL } = process.env;
-let token;
 
-const ViewEntry = () => {
+const ViewEntry = ({updateEntry, user}) => {
   const {id} = useParams();
-  const location = useLocation();
-  token = location.state.token;
 
   const [ entry, setEntry ] = useState(null);
   const [ action, setAction ] = useState('view')
  
   const getEntry = async() => {
+    let token = await user.getIdToken();
     const response = await fetch(REACT_APP_BASE_URL+'/'+id, {
       method: 'GET',
       headers: {
@@ -33,6 +31,7 @@ const ViewEntry = () => {
   };
 
   const handleDelete = async () => {
+    let token = await user.getIdToken();
     await fetch(REACT_APP_BASE_URL+'/'+id, {
       method: 'DELETE',
       headers: {
@@ -41,16 +40,6 @@ const ViewEntry = () => {
     });
   };
 
-  const updateEntry = async (entry) => {
-    await fetch(REACT_APP_BASE_URL+'/'+id, {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'Application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(entry)
-    });
-  };
 
   const loading = () => {
     return (<h1>Loading...</h1>);
@@ -69,7 +58,7 @@ const ViewEntry = () => {
           <button type="button" onClick={handleDelete}>Delete</button>
         </section>
         <section className="editEntry">
-          <NewEntry status="edit" data={entry} updateEntry={updateEntry}/>
+          <NewEntry status="edit" data={entry} updateEntry={updateEntry} user={user} id={id}/>
         </section>
       </main>
     )

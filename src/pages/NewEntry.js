@@ -3,9 +3,6 @@ import { useLocation } from "react-router";
 import EntryForm from '../components/EntryForm'
 
 const NewEntry = (props) => {
-  const location = useLocation();
-  const createEntry = location.createEntry;
-
   //Set form state
   const [formState, setFormState] = useState({
     feeling: 0,
@@ -18,7 +15,6 @@ const NewEntry = (props) => {
   });
 
   useEffect(() => {
-    console.log('this is firing');
     if(props.status === 'edit') {
       setFormState(props.data)
     }
@@ -27,7 +23,7 @@ const NewEntry = (props) => {
   //Form helper functions
   const handleSubmit = (event) => {
     event.preventDefault();
-    createEntry(formState);
+    props.createEntry(formState);
     setFormState({
       feeling: 0,
       emotion: '',
@@ -41,7 +37,7 @@ const NewEntry = (props) => {
 
   const handleUpdate = (event) => {
     event.preventDefault();
-    props.updateEntry(formState);
+    props.updateEntry(formState, props.id);
     setFormState({
       feeling: 0,
       emotion: '',
