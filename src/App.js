@@ -128,7 +128,7 @@ function App() {
             <Redirect to="/login" />
           )} />
         <Route exact path="/entries">
-          <AllEntries />
+          <AllEntries data={entries}/>
         </Route>
         <Route exact path="/entries/new">
           <NewEntry createEntry={createEntry} user={user}/>

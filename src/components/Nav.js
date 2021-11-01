@@ -20,10 +20,6 @@ const Nav = ({user, token, data, createEntry}) => {
               <li>
                 <Link to={{
                   pathname: '/entries/new',
-                  createEntry: createEntry,
-                  state: {
-                    token: token
-                  }
                 }}>
                 New Entry
                 </Link>
@@ -31,10 +27,6 @@ const Nav = ({user, token, data, createEntry}) => {
               <li>
               <Link to={{
                   pathname: '/entries',
-                  state: {
-                    data: data,
-                  }
-                  
                 }}>
                 All Entries
                 </Link>

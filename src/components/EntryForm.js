@@ -100,7 +100,6 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
         />
       </div>
       <input type="submit" value={isEdit ? "Submit" : "Add Entry" }/>
-      {isEdit ? <button type="button">Cancel</button> : ''}
     </StyledForm>
     );
   };

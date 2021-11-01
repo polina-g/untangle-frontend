@@ -1,9 +1,6 @@
 import EntryTable from "../components/EntryTable";
-import { useLocation } from "react-router";
 
-const AllEntries = (props) => {
-  const location = useLocation();
-  const data = location.state.data;
+const AllEntries = ({data}) => {
     return (
     <main>
       <h1>All entries</h1>  
