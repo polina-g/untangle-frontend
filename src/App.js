@@ -20,7 +20,7 @@ function App() {
   const [ user, setUser ] = useState(null);
   const [ entries, setEntries ] = useState([])
   const fetchData = useRef(null);
-
+ 
   //========== GET DATA ============================
   const getEntries = async () => {
     if(!user) return;
@@ -77,9 +77,20 @@ function App() {
           'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
-      })
+      });
       getEntries();
-    }
+    };
+
+    const deleteEntry = async (id) => {
+      let token = await user.getIdToken();
+      await fetch(REACT_APP_BASE_URL+'/'+id, {
+        method: 'DELETE',
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+      getEntries();
+    };
 
     //=================================================
     useEffect(() => {
@@ -134,7 +145,7 @@ function App() {
           <NewEntry createEntry={createEntry} user={user}/>
         </Route>
         <Route exact path="/entries/:id">
-          <ViewEntry updateEntry={updateEntry} user={user}/>
+          <ViewEntry updateEntry={updateEntry} deleteEntry={deleteEntry} user={user}/>
         </Route>
         <Route exact path="/entries/:id/edit">
           <EditEntry />

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import NewEntry from './NewEntry';
 const { REACT_APP_BASE_URL } = process.env;
 
-const ViewEntry = ({updateEntry, user}) => {
+const ViewEntry = ({updateEntry, deleteEntry, user}) => {
   const {id} = useParams();
+  const history = useHistory();
 
   const [ entry, setEntry ] = useState(null);
   const [ action, setAction ] = useState('view')
@@ -30,15 +31,10 @@ const ViewEntry = ({updateEntry, user}) => {
     setEntry(data);
   };
 
-  const handleDelete = async () => {
-    let token = await user.getIdToken();
-    await fetch(REACT_APP_BASE_URL+'/'+id, {
-      method: 'DELETE',
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    });
-  };
+    const handleDelete = () => {
+      deleteEntry(id);
+      history.push('/dashboard');
+    }
 
   const view = () => {
     return(

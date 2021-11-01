@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router";
+import { useHistory } from "react-router-dom";
 import EntryForm from '../components/EntryForm'
 
 const NewEntry = (props) => {
+  const history = useHistory();
   //Set form state
   const [formState, setFormState] = useState({
     feeling: 0,
@@ -47,6 +48,7 @@ const NewEntry = (props) => {
       situation: '',
       private: false
     });
+    history.push('/dashboard')
   }
 
   const handleChange = (event) => {
