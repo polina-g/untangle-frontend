@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
+import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
@@ -21,8 +22,6 @@ import { StyledLogo } from '../styles';
 import { LinkStyle } from '../styles';
 
 const Nav = ({user}) => {
-
-
   return (
     <Box>
     <AppBar position='static'>
@@ -79,6 +78,7 @@ const Nav = ({user}) => {
                 >
                     Untangle
                 </Typography>
+                <Avatar alt="Avatar image" src={user.photoURL} />
                 <Button 
                   variant='contained' 
                   color='secondary'

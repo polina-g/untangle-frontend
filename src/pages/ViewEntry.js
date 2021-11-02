@@ -4,19 +4,31 @@ import NewEntry from './NewEntry';
 
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
-import { flexbox } from '@mui/system';
+import Paper from '@mui/material/Paper';
+import ListItem from '@mui/material/ListItem';
+import List from '@mui/material/List';
+import Divider from '@mui/material/Divider';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Button from '@mui/material/Button';
 
 const ViewEntry = ({updateEntry, deleteEntry, data}) => {
   const {id} = useParams();
   const history = useHistory();
   const [ entry, setEntry ] = useState(null);
   const [ action, setAction ] = useState('view')
+
+  //Smiley face images:
+  const images = ['https://i.imgur.com/kj80WQP.png', 
+                  'https://i.imgur.com/dPeJdMK.png', 
+                  'https://i.imgur.com/X3Oeeja.png', 
+                  'https://i.imgur.com/Wkm4rbM.png', 
+                  'https://i.imgur.com/9DlOwAL.png'];
  
   const getEntry = () => {
-    console.log('this is the data:', data)
     if(data.length) {
       const foundEntry = data.find(entry => entry._id === id);
-      console.log(foundEntry);
+
       //Format timestamp
       const date = new Date(foundEntry.createdAt);
       const formattedDate = new Intl.DateTimeFormat('en', {
@@ -37,17 +49,72 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
 
   const view = () => {
     return(
-      <main>
-      <section className="viewEntry">
-        <h1>{entry.formattedDate}</h1>
-        <h1>{entry.feeling}</h1>
-        <h1>{entry.emotion} | {entry.intensity}</h1>
-        <h1>{entry.thought} | {entry.rob}</h1>
-        <p>{entry.situation}</p>
-        <button type="button" onClick={() => setAction('edit')}>Edit</button>
-        <button type="button" onClick={handleDelete}>Delete</button>
-      </section>
-    </main>
+      <Box
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      sx={{width: '100%', mt: 5}}
+      >
+      <Paper elevation={5} sx={{width: '70%', mb: '2rem'}}>
+        <List>
+          <ListItem>
+            <ListItemText 
+              primary={entry.formattedDate}
+            />
+            <ListItemIcon>
+              <img src={images[entry.feeling-1]} />
+            </ListItemIcon>
+          </ListItem>
+          <Divider />
+
+          <ListItem>
+            <ListItemText 
+              secondary={`${entry.emotion}  (Intensity:  ${entry.intensity}/100)`}
+              primary='My emotions'
+            />
+          </ListItem>
+          <Divider />
+
+          <ListItem>
+            <ListItemText 
+              secondary={`${entry.thought} (Rate of belief: ${entry.rob}/100)`}
+              primary="My Most Distressing Thought"
+            />
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <ListItemText 
+              secondary={entry.situation}
+              primary='Brief Description'
+              sx={{mb: 5}}
+            />
+          </ListItem>
+        </List>
+        <Box
+          display='flex'
+          alignItems='flex-start'>
+          <Button
+            type='button'
+            onClick={() => setAction('edit')}
+            color='primary'
+            variant='contained'
+            sx={{width:'20%', mr:5, mb:3, ml:2}}
+          >
+            Edit Entry
+          </Button>
+
+          <Button
+            type='button'
+            onClick={handleDelete}
+            color='secondary'
+            variant='contained'
+            sx={{width:'20%', mr:5, mb:3}}
+          >
+            Delete Entry
+          </Button>
+        </Box>
+      </Paper>
+    </Box>
     );
   };
 
@@ -55,8 +122,8 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
     return(    
     <main>
       <section className="editEntry">
-        <NewEntry status="edit" data={entry} updateEntry={updateEntry} id={id}/>
         <button type="button" onClick={() => setAction('view')}>Cancel</button>
+        <NewEntry status="edit" data={entry} updateEntry={updateEntry} id={id}/>
       </section>
     </main>
     );
