@@ -7,16 +7,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import MenuIcon from '@mui/icons-material/Menu';
-import AccountCircle from '@mui/icons-material/AccountCircle';
-import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import MenuItem from '@mui/material/MenuItem';
-import Menu from '@mui/material/Menu';
 
 import { StyledLogo } from '../styles';
 import { LinkStyle } from '../styles';
@@ -92,15 +83,7 @@ const Nav = ({user}) => {
              </>
             :
              <> 
-              <Typography
-                  variant="h3"
-                  noWrap
-                  component="div"
-                  color='secondary'
-                  sx={{ flexGrow:1 }}
-              >
-                  Untangle
-              </Typography>
+              <Box sx={{ flexGrow:1 }}></Box>
               <LinkStyle>
                 <Link to="/login">
                   <Button 
@@ -132,54 +115,6 @@ const Nav = ({user}) => {
       </Toolbar>
     </AppBar>
   </Box>
-      // <nav>
-      //   <ul>
-      //     { user ? 
-      //       <>
-      //         <li onClick={logOut}>
-      //             Log Out
-      //         </li>
-      //         <li>
-      //           <Link to="/dashboard">
-      //               Dashboard
-      //           </Link>
-      //         </li>
-      //         <li>
-      //           <Link to={{
-      //             pathname: '/entries/new',
-      //           }}>
-      //           New Entry
-      //           </Link>
-      //         </li>
-      //         <li>
-      //         <Link to={{
-      //             pathname: '/entries',
-      //           }}>
-      //           All Entries
-      //           </Link>
-      //         </li>
-      //       </>
-      //      :
-      //       <> 
-      //         <li>
-      //           <Link to="/">
-      //               Home
-      //           </Link>
-      //         </li>
-      //         <li>
-      //           <Link to="/login">
-      //               Log In
-      //           </Link>
-      //         </li>
-      //         <li>
-      //           <Link to="/register">
-      //               Sign Up
-      //           </Link>
-      //         </li>
-      //       </>
-      //   }
-      //   </ul>
-      // </nav>
     );
   };
 

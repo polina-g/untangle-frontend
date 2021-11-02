@@ -11,6 +11,7 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Button from '@mui/material/Button';
+import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 const ViewEntry = ({updateEntry, deleteEntry, data}) => {
   const {id} = useParams();
@@ -57,16 +58,20 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
       >
       <Paper elevation={5} sx={{width: '70%', mb: '2rem'}}>
         <List>
-          <ListItem>
-            <ListItemText 
-              primary={entry.formattedDate}
-            />
-            <ListItemIcon>
-              <img src={images[entry.feeling-1]} />
-            </ListItemIcon>
-          </ListItem>
-          <Divider />
-
+          <Box
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <ListItem>
+              <ListItemText 
+                primary={entry.formattedDate}
+              />
+              <ListItemIcon>
+                <img src={images[entry.feeling-1]} />
+              </ListItemIcon>
+            </ListItem>
+          </Box>
           <ListItem>
             <ListItemText 
               secondary={`${entry.emotion}  (Intensity:  ${entry.intensity}/100)`}
@@ -86,6 +91,7 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
             <ListItemText 
               secondary={entry.situation}
               primary='Brief Description'
+              multiline
               sx={{mb: 5}}
             />
           </ListItem>
@@ -122,7 +128,15 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
     return(    
     <main>
       <section className="editEntry">
-        <button type="button" onClick={() => setAction('view')}>Cancel</button>
+      <Button
+            type='button'
+            onClick={() => setAction('view')}
+            color='secondary'
+            variant='contained'
+            sx={{width:'50%', mt:4}}
+          >
+            Go Back
+        </Button>
         <NewEntry status="edit" data={entry} updateEntry={updateEntry} id={id}/>
       </section>
     </main>
