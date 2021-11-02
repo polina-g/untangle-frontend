@@ -55,7 +55,6 @@ const NewEntry = (props) => {
     const value = event.target.name === 'private' 
     ? event.target.checked 
     : event.target.value
-    console.log ([event.target.name], value);
     setFormState((prevState) => ({
       ...prevState,
       [event.target.name]: value 

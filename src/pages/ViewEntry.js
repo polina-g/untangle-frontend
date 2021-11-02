@@ -4,35 +4,30 @@ import NewEntry from './NewEntry';
 
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
+import { flexbox } from '@mui/system';
 
-const { REACT_APP_BASE_URL } = process.env;
-
-const ViewEntry = ({updateEntry, deleteEntry, user}) => {
+const ViewEntry = ({updateEntry, deleteEntry, data}) => {
   const {id} = useParams();
   const history = useHistory();
-
   const [ entry, setEntry ] = useState(null);
   const [ action, setAction ] = useState('view')
  
-  const getEntry = async() => {
-    let token = await user.getIdToken();
-    const response = await fetch(REACT_APP_BASE_URL+'/'+id, {
-      method: 'GET',
-      headers: {
-        'Authorization': 'Bearer ' + token
-      }
-    });
-
-    const data = await response.json();
-    //Format timestamp
-    const date = new Date(data.createdAt);
-    const formattedDate = new Intl.DateTimeFormat('en', {
-      dateStyle: 'short'
-    }).format(date);
-    data.formattedDate = formattedDate;
-
-    //Set state
-    setEntry(data);
+  const getEntry = () => {
+    console.log('this is the data:', data)
+    if(data.length) {
+      const foundEntry = data.find(entry => entry._id === id);
+      console.log(foundEntry);
+      //Format timestamp
+      const date = new Date(foundEntry.createdAt);
+      const formattedDate = new Intl.DateTimeFormat('en', {
+        dateStyle: 'short'
+      }).format(date);
+      foundEntry.formattedDate = formattedDate;
+      
+      setEntry(foundEntry);
+    } else {
+      loading();
+    }
   };
 
     const handleDelete = () => {
@@ -70,7 +65,7 @@ const ViewEntry = ({updateEntry, deleteEntry, user}) => {
 
   const loading = () => {
     return (
-      <Box sx={{ width: 300 }}>
+      <Box sx={{ width: 1000, pl: '30%', pt: 10}}>
         <Skeleton />
         <Skeleton animation="wave" />
         <Skeleton animation={false} />
@@ -84,7 +79,7 @@ const ViewEntry = ({updateEntry, deleteEntry, user}) => {
 
   useEffect(() => {
     getEntry();
-  }, []);
+  }, [data]);
 
   return entry ? loaded() : loading();
 };

@@ -165,7 +165,7 @@ function App() {
             <NewEntry createEntry={createEntry} user={user}/>
           </Route>
           <Route exact path="/entries/:id">
-            <ViewEntry updateEntry={updateEntry} deleteEntry={deleteEntry} user={user}/>
+            <ViewEntry updateEntry={updateEntry} deleteEntry={deleteEntry} user={user} data={entries}/>
           </Route>
           <Route exact path="/entries/:id/edit">
             <EditEntry />

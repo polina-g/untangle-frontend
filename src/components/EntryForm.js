@@ -49,7 +49,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               label={<img src='https://i.imgur.com/kj80WQP.png'/>}
               labelPlacement='top'
               name="feeling"
-              checked={formState.feeling===1}
+              checked={formState.feeling==1}
             />
             <FormControlLabel 
               value="2" 
@@ -58,7 +58,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               label={<img src='https://i.imgur.com/dPeJdMK.png' />}
               labelPlacement='top'
               name="feeling"
-              checked={formState.feeling===2}
+              checked={formState.feeling==2}
             />
             <FormControlLabel 
               value="3" 
@@ -67,7 +67,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               label={<img src='https://i.imgur.com/X3Oeeja.png'/>}
               labelPlacement='top'
               name="feeling"
-              checked={formState.feeling===3}
+              checked={formState.feeling==3}
             />
             <FormControlLabel 
               value="4" 
@@ -76,7 +76,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               label={<img src='https://i.imgur.com/Wkm4rbM.png'/>}
               labelPlacement='top'
               name="feeling"
-              checked={formState.feeling===4}
+              checked={formState.feeling==4}
             />
             <FormControlLabel 
               value="5" 
@@ -85,7 +85,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               label={<img src='https://i.imgur.com/9DlOwAL.png'/>}
               labelPlacement='top'
               name="feeling"
-              checked={formState.feeling===5}
+              checked={formState.feeling==5}
             />
           </RadioGroup>
        
@@ -169,12 +169,10 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
             label="Mark Private"
             labelPlacement="left"
           />
-      <Button type="submit" variant="contained" sx={{mt: '1rem', width:'30%'}}>Add Entry</Button>
+      <Button type="submit" variant="contained" sx={{mt: '1rem', width:'30%'}}>{isEdit ? 'Submit Changes' : 'Add Entry'}</Button>
       </FormControl>
     </form>
-
     </Paper>
-
     </Box>
     );
   };
