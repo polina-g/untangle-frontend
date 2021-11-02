@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 
+export const StyledLogo = styled.img`
+    height: 100px; 
+`;
+
 export const StyledHeader = styled.nav`
     display: flex;
     align-items: center;

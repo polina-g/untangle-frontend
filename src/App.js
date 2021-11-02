@@ -12,6 +12,8 @@ import EditEntry from './pages/EditEntry';
 import AllEntries from './pages/AllEntries';
 import Footer from './components/Footer' 
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 import { auth } from './services/firebase';
 const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL} = process.env;
 let token;
@@ -20,6 +22,21 @@ function App() {
   const [ user, setUser ] = useState(null);
   const [ entries, setEntries ] = useState([])
   const fetchData = useRef(null);
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: '#186583',
+        light: '#5193b3',
+        dark: '#003b56'
+      },
+      secondary: {
+        main: '#e38474',
+        light: '#ffb5a3',
+        dark: '#ae5648',
+      },
+    }
+  });
  
   //========== GET DATA ============================
   const getEntries = async () => {
@@ -112,46 +129,48 @@ function App() {
 
   return (
     <div className="App">
-      <Nav 
-        user={user} 
-        data={entries}
-        createEntry={createEntry}
-        token={token} />
-      <Switch>
-        <Route exact path="/">
-          <Landing />
-        </Route>
-        <Route path="/login" render={() => (
-            user ? <Redirect to="/dashboard" /> : <Login />
-          )} />
-        <Route path="/register">
-          <CreateAccount />
-        </Route>
-        <Route path="/dashboard" render={() => (
-          user ? 
-            <Dashboard 
-              data={entries} 
-              createClient={createClient}
-              createEntry={createEntry}
-              token={token}
-              user={user}
-            /> : 
-            <Redirect to="/login" />
-          )} />
-        <Route exact path="/entries">
-          <AllEntries data={entries}/>
-        </Route>
-        <Route exact path="/entries/new">
-          <NewEntry createEntry={createEntry} user={user}/>
-        </Route>
-        <Route exact path="/entries/:id">
-          <ViewEntry updateEntry={updateEntry} deleteEntry={deleteEntry} user={user}/>
-        </Route>
-        <Route exact path="/entries/:id/edit">
-          <EditEntry />
-        </Route>
-      </Switch>
-      <Footer />
+      <ThemeProvider theme={theme}>
+        <Nav 
+          user={user} 
+          data={entries}
+          createEntry={createEntry}
+          token={token} />
+        <Switch>
+          <Route exact path="/">
+            <Landing />
+          </Route>
+          <Route path="/login" render={() => (
+              user ? <Redirect to="/dashboard" /> : <Login />
+            )} />
+          <Route path="/register">
+            <CreateAccount />
+          </Route>
+          <Route path="/dashboard" render={() => (
+            user ? 
+              <Dashboard 
+                data={entries} 
+                createClient={createClient}
+                createEntry={createEntry}
+                token={token}
+                user={user}
+              /> : 
+              <Redirect to="/login" />
+            )} />
+          <Route exact path="/entries">
+            <AllEntries data={entries}/>
+          </Route>
+          <Route exact path="/entries/new">
+            <NewEntry createEntry={createEntry} user={user}/>
+          </Route>
+          <Route exact path="/entries/:id">
+            <ViewEntry updateEntry={updateEntry} deleteEntry={deleteEntry} user={user}/>
+          </Route>
+          <Route exact path="/entries/:id/edit">
+            <EditEntry />
+          </Route>
+        </Switch>
+        <Footer />
+      </ThemeProvider>
     </div>
   );
 }
