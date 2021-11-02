@@ -13,6 +13,7 @@ import AllEntries from './pages/AllEntries';
 import Footer from './components/Footer' 
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 import { auth } from './services/firebase';
 const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL} = process.env;
@@ -129,6 +130,7 @@ function App() {
 
   return (
     <div className="App">
+      <CssBaseline />
       <ThemeProvider theme={theme}>
         <Nav 
           user={user} 
