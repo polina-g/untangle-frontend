@@ -1,5 +1,3 @@
-import { StyledForm } from "../styles";
-
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Paper from '@mui/material/Paper'
@@ -8,11 +6,10 @@ import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
 import Slider from "@mui/material/Slider";
 import Typography from "@mui/material/Typography";
-import FormLabel from "@mui/material/FormLabel";
 import FormControl from "@mui/material/FormControl";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormGroup from "@mui/material/FormGroup";
-import { Checkbox } from "@mui/material";
+import Checkbox from "@mui/material/Checkbox";
 
 
 

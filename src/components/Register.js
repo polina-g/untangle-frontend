@@ -1,6 +1,19 @@
 import { useState } from "react";
 import { Redirect } from "react-router";
 
+import Box from '@mui/material/Box'
+import Button from '@mui/material/Button'
+import Paper from '@mui/material/Paper'
+import TextField from '@mui/material/TextField'
+import RadioGroup from "@mui/material/RadioGroup";
+import Radio from "@mui/material/Radio";
+import Slider from "@mui/material/Slider";
+import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormGroup from "@mui/material/FormGroup";
+import Checkbox from "@mui/material/Checkbox";
+
 const Register = ({createClient}) => {
   const [formState, setFormState] = useState({
     acct: 'client',
@@ -29,34 +42,68 @@ const Register = ({createClient}) => {
         therapist: [],
       })
     }
+
     return (
-      <section>
-        <form onSubmit={handleSumbit}>
-          <input
-            onChange={handleChange}
-            value={formState.f_name}
-            name="f_name"
-            type="text"
-            placeholder="First Name"
-          />
-          <input
-            onChange={handleChange}
-            value={formState.l_name}
-            name="l_name"
-            type="text"
-            placeholder="Last Name"
-          />
-          <input
-            onChange={handleChange}
-            value={formState.email}
-            name="email"
-            type="email"
-            placeholder="E-mail"
-          />
-          <input type="submit" value="Create Profile"/>
-        </form>
-        <Redirect to="/dashboard" />
-      </section>
+      <Box         
+      display="flex"
+      justifyContent="center"
+      alignItems="center"
+      sx={{width: '50%', ml:'25%', mt:5}}>
+        <Paper elevation={5} sx={{width: '100%', p: '1rem'}}>
+          <form onSubmit={handleSumbit}>
+            <FormControl>
+              <Typography
+                variant="h3"
+                color='primary'
+                fontWeight='light'
+                sx={{mt: 3, mb: 3}}
+              >
+                Welcome to Untangle! Please register below to continue
+              </Typography>
+              <TextField
+                type="text"
+                label="First Name"
+                autoComplete='off'
+                margin="normal"
+                onChange={handleChange}
+                value={formState.f_name}
+                name="f_name"
+                required
+              />
+              <TextField
+                type="text"
+                label="Last Name"
+                name="l_name" 
+                autoComplete='off'
+                margin="normal"
+                fullWidth
+                required
+                onChange={handleChange}
+                value={formState.l_name}
+              />
+              <TextField
+                type="text"
+                label="E-mail"
+                name="email"
+                autoComplete='off'
+                margin="normal"
+                fullWidth
+                required
+                onChange={handleChange}
+                value={formState.email}
+              />
+              <Button 
+                type="submit" 
+                variant="contained" 
+                sx={{mt: '1rem', width:'30%', ml: '35%'}}
+              >
+                Register!
+              </Button>
+            </FormControl>
+          <Redirect to="/dashboard" />
+          </form>
+        </Paper>
+      </Box>
     );
   };
 

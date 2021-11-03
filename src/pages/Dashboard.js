@@ -6,6 +6,7 @@ import { StyledDashBoardTop } from '../styles';
 
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 const {REACT_APP_CLIENT_URL} = process.env;
 
@@ -46,7 +47,14 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
     return (
     client.length ? 
       <main>
-        <h1>Hi {client[0].f_name}, what would you like to do today?</h1>
+          <Typography
+            variant="h2"
+            color='primary'
+            sx={{mt: 3}}
+          >
+          Hi {client[0].f_name}, what would you like to do today?
+          </Typography>
+        <h1></h1>
         <StyledDashBoardTop>
           <DashBox title="Create New Entry" token={token} createEntry={createEntry} link="/entries/new" color='success'/>
           <DashBox title="View All Entries" token={token} data={data} link="/entries" color='primary'/>
