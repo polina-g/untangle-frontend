@@ -41,7 +41,7 @@ const CreateAccount = () => {
       }}
     >   
         <Paper sx={{width:'70%'}}>
-          <img src="https://i.imgur.com/dAi63Ss.png" width="100%"/>
+          <img src="https://i.imgur.com/feD6gWb.jpg" width="100%"/>
         </Paper>
         <Paper 
           sx={{

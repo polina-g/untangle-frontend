@@ -27,6 +27,7 @@ const Dashboard = ({data, createClient, createEntry, token, user}) => {
     });    
   };
 
+
   useEffect(() => {
     checkIfClient();
   }, [token]);
@@ -60,7 +61,7 @@ const Dashboard = ({data, createClient, createEntry, token, user}) => {
         </StyledDashBoardTop>
         <EntryTable data={data} token={token} dashboard/>
       </main>
-    : <Register createClient={createClient} user={user} setClient={setClient}/> 
+    : <Register createClient={createClient} user={user} setClient={setClient} /> 
     );
   };
 

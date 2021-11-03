@@ -22,6 +22,7 @@ let token;
 function App() {
   const [ user, setUser ] = useState(null);
   const [ entries, setEntries ] = useState([])
+  const [ clientType, setClientType] = useState(null);
   const fetchData = useRef(null);
 
   const theme = createTheme({
@@ -57,19 +58,33 @@ function App() {
   }
 
   //====================== CLIENT FUNCTIONS======================= 
-  const createClient = async (person) => {
-    if(!user) return;
-    const data = {...person, managedBy: user.uid};
-    token = await user.getIdToken();
-    await fetch(REACT_APP_CLIENT_URL, {
-      method: 'POST',
-      headers: {
-        'Content-type': 'Application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(data)
-    })
-  }
+    const createClient = async (person) => {
+      if(!user) return;
+      const data = {...person, managedBy: user.uid};
+      token = await user.getIdToken();
+      await fetch(REACT_APP_CLIENT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'Application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+      });
+    };
+
+    const createTherapist = async (person) => {
+      if(!user) return;
+      const data = {...person, managedBy: user.uid};
+      token = await user.getIdToken();
+      await fetch(REACT_APP_CLIENT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-type': 'Application/json',
+          'Authorization': 'Bearer ' + token
+        },
+        body: JSON.stringify(data)
+      });
+    };
 
     //=============== ENTRY FUNCTIONS=================
     const createEntry = async (entry) => {
@@ -148,7 +163,7 @@ function App() {
               user ? <Redirect to="/dashboard" /> : <Login />
             )} />
           <Route path="/register">
-            <CreateAccount />
+            <CreateAccount setClientType={setClientType}/>
           </Route>
           <Route path="/dashboard" render={() => (
             user ? 
@@ -158,6 +173,7 @@ function App() {
                 createEntry={createEntry}
                 token={token}
                 user={user}
+                clientType={clientType}
               /> : 
               <Redirect to="/login" />
             )} />
