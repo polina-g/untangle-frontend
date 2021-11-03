@@ -50,7 +50,7 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
           <Typography
             variant="h2"
             color='primary'
-            sx={{mt: 3}}
+            sx={{mt: 5}}
           >
           Hi {client[0].f_name}, what would you like to do today?
           </Typography>

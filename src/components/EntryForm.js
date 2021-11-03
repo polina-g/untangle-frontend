@@ -12,19 +12,16 @@ import FormGroup from "@mui/material/FormGroup";
 import Checkbox from "@mui/material/Checkbox";
 
 
-
 const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
   return (
     <Box 
     sx={{width: '70%', mt:5, ml:'15%'}}
     justifyContent="center"
     alignItems="center">
-
       <Paper 
         elevation={10} 
         sx={{width: '100%', p: '2rem'}}
       >
-
         <form onSubmit={handleSubmit}>
         <FormControl fullWidth>
           <Typography

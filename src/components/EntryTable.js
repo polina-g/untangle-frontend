@@ -1,4 +1,3 @@
-import { LinkStyle } from '../styles';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -11,15 +10,42 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/system/Box';
 
-const EntryTable = ({data, token, dashboard}) => {
+const EntryTable = ({data, dashboard}) => {
   const [entries, setEntries] = useState(data);
 
   const loading = () => {
     return <h1>Loading</h1>
   }
 
-  const loaded = () => {
+  const noEntries = () => {
+    return (
+    <Box
+    sx={{width:'80%', ml:'10%', mt:10}}
+    >
+      <Typography
+      variant="h3"
+      color='primary'
+      sx={{mt: 3}}
+      fontWeight='light'
+    >
+    No entries to see yet...
+    </Typography>
+    <Typography
+      variant="h3"
+      color='primary'
+      fontWeight='light'
+    >
+    Click "Create New Entry" to add your first one!
+    </Typography>
+      <img src="https://i.imgur.com/qs9rHvq.png" width="80%" />
+    </Box>
+    );
+  }
+
+  const showEntries = () => {
     return(
       <TableContainer 
         component={Paper}
@@ -73,6 +99,10 @@ const EntryTable = ({data, token, dashboard}) => {
         </Table>
       </TableContainer>
     )
+  }
+
+  const loaded = () => {
+    return entries.length ? showEntries() : noEntries()
   };
 
     return entries ? loaded() : loading()
