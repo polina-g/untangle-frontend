@@ -36,6 +36,9 @@ function App() {
         light: '#ffb5a3',
         dark: '#ae5648',
       },
+      success: {
+        main: '#837285'
+      }
     }
   });
  

@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import Box from '@mui/material/Box'
 import Paper from "@mui/material/Paper";
 
-const DashBox = ({title, link, token, data}) => {
+const DashBox = ({title, link, color}) => {
+    console.log(color);
     return (
     <Box
         sx={{
@@ -13,23 +14,18 @@ const DashBox = ({title, link, token, data}) => {
             height: 250,
             typography: 'h4',
             fontWeight: 'light',
-            backgroundColor: 'whitesmoke',
             wordWrap: 'break-word',
             '&:hover': {
-                backgroundColor: 'whitesmoke',
                 opacity: [0.9, 0.8, 0.7],
             }
         }}
     >
         <LinkStyle>
-            <Link to={{
-                pathname: `${link}`,
-                state: {
-                    token: token,
-                    data: data
-                }
-            }}>
-                <Paper elevation={10} sx={{ width: 250, height: 250}}>
+            <Link to={`${link}`}>
+                <Paper 
+                    elevation={10} 
+                    sx={{ width: 250, height: 250, bgcolor: `${color}.light`}}
+                    >
                     <StyledBoxLinkText className="BoxLinkText">{title}</StyledBoxLinkText>
                 </Paper>
             </Link>

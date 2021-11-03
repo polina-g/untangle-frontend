@@ -1,4 +1,4 @@
-import { StyledTable } from '../styles';
+import { LinkStyle } from '../styles';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -10,6 +10,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 
 const EntryTable = ({data, token, dashboard}) => {
   const [entries, setEntries] = useState(data);
@@ -20,8 +21,12 @@ const EntryTable = ({data, token, dashboard}) => {
 
   const loaded = () => {
     return(
-      <TableContainer component={Paper}>
-        <Table aria-label="simple table">
+      <TableContainer 
+        component={Paper}
+        sx={{width: '90%', mt: 8, ml: '5%'}}  
+        elevation={10}
+      >
+        <Table aria-label="simple table" sx={{width: '100%'}} size='medium' padding='normal' stickyHeader>
           <TableHead>
             <TableRow>
               <TableCell align="center">Date</TableCell>
@@ -42,20 +47,24 @@ const EntryTable = ({data, token, dashboard}) => {
               dateStyle: 'short'
             }).format(date);
             return (            
-              <TableRow key={index}>
+              <TableRow key={index} hover='true'>
                 <TableCell align="center">{formattedDate}</TableCell>
                 <TableCell align="center">{feeling}</TableCell>
                 <TableCell align="center">{emotion}</TableCell>
                 <TableCell align="center">{thought}</TableCell>
-                <Link 
-                    to={{
-                    pathname: `/entries/${entry._id}`,
-                    state: {
-                      token: token
-                    }
-                  }}>
-                    View
+                <TableCell align="center">
+                  <Link to={`/entries/${entry._id}`}>
+                    <Button
+                      type='button'
+                      color='secondary'
+                      variant='contained'
+                      fullWidth
+                      sx={{mt:1}}
+                    >
+                      View
+                    </Button>
                   </Link>
+                </TableCell>  
                 </TableRow>
               );
             })

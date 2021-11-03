@@ -34,7 +34,7 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
 
   const loading = () => {
     return (
-      <Box sx={{ width: 300 }}>
+      <Box sx={{ width: 1000, pl: '30%', pt: 10}}>
         <Skeleton />
         <Skeleton animation="wave" />
         <Skeleton animation={false} />
@@ -48,9 +48,9 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
       <main>
         <h1>Hi {client[0].f_name}, what would you like to do today?</h1>
         <StyledDashBoardTop>
-          <DashBox title="Create New Entry" token={token} createEntry={createEntry} link="/entries/new"/>
-          <DashBox title="View All Entries" token={token} data={data} link="/entries"/>
-          <DashBox title="Resources / Helpful Tips" link="/" token={token}/>
+          <DashBox title="Create New Entry" token={token} createEntry={createEntry} link="/entries/new" color='success'/>
+          <DashBox title="View All Entries" token={token} data={data} link="/entries" color='primary'/>
+          <DashBox title="Resources / Helpful Tips" link="/" token={token} color='secondary'/>
         </StyledDashBoardTop>
         <EntryTable data={data} token={token} dashboard/>
       </main>

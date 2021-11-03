@@ -38,14 +38,6 @@ export const StyledHeader = styled.nav`
     }
 `;
 
-export const StyledMain = styled.main`
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 3rem;
-`;
-
 export const StyledDashBoardTop = styled.section`
     margin: 50px 60px 20px 60px;
     display: flex;
