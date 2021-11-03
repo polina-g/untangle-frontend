@@ -12,8 +12,11 @@ import GoogleIcon from '@mui/icons-material/Google';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
+import RadioGroup from "@mui/material/RadioGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Radio from "@mui/material/Radio";
 
-const CreateAccount = () => {
+const CreateAccount = ({setClientType}) => {
   const history = useHistory();
   const [user, setUser] = useState({
     email: '',
@@ -28,11 +31,13 @@ const CreateAccount = () => {
   }
 
   const handleSubmit = () => {
-    createUserWithPassword(user.email, user.password)
-    history.push('/dashboard')
+    createUserWithPassword(user.email, user.password);
+    history.push('/dashboard');
+  };
 
-  }
-
+  const handleClientChoice = (event) => {
+    setClientType(event.target.value);
+  };
     return (
     <Box 
       sx={{
@@ -86,6 +91,22 @@ const CreateAccount = () => {
                 value={user.password}
               />
             </Box>
+        <RadioGroup row>
+          <FormControlLabel 
+            value="client" 
+            control={<Radio />}
+            onChange={handleClientChoice}
+            label='I am a client'
+            labelPlacement='top'
+          />
+          <FormControlLabel 
+            value="therapist" 
+            control={<Radio />}
+            onChange={handleClientChoice}
+            label='I am a Therapist'
+            labelPlacement='top'
+          />
+          </RadioGroup>
           <Button 
           onClick={handleSubmit}
           variant="contained"
