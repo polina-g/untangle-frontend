@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Redirect, useHistory } from "react-router-dom";
 
 import Box from '@mui/material/Box'
@@ -8,13 +8,15 @@ import TextField from '@mui/material/TextField'
 import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 
-const Register = ({createClient}) => {
+const Register = ({createClient, user, setClient}) => {
+  console.log(setClient);
   const history = useHistory();
+  const [newClient, setNewClient] = useState(user);
   const [formState, setFormState] = useState({
     acct: 'client',
     f_name: '',
     l_name: '',
-    email: '',
+    email: newClient.email,
     therapist: [],
   });
 
@@ -33,11 +35,16 @@ const Register = ({createClient}) => {
         acct: 'client',
         f_name: '',
         l_name: '',
-        email: '',
+        email: newClient.email,
         therapist: [],
       })
-      history.push('/dashboard');
+      setClient('true');
+      // history.push('/dashboard');
     }
+
+    useEffect(() => {
+      setNewClient(user)
+    }, [user])
 
     return (
       <Box         
