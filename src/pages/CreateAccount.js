@@ -1,4 +1,6 @@
 import { signIn, createUserWithPassword } from '../services/firebase';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
@@ -12,6 +14,25 @@ import Avatar from '@mui/material/Avatar';
 import PersonAddAlt1OutlinedIcon from '@mui/icons-material/PersonAddAlt1Outlined';
 
 const CreateAccount = () => {
+  const history = useHistory();
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  });
+
+  const handleChange = (event) => {
+    setUser((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value 
+    }));
+  }
+
+  const handleSubmit = () => {
+    createUserWithPassword(user.email, user.password)
+    history.push('/dashboard')
+
+  }
+
     return (
     <Box 
       sx={{
@@ -50,6 +71,8 @@ const CreateAccount = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={handleChange}
+                value={user.email}
               />
               <TextField
                 margin="normal"
@@ -59,11 +82,12 @@ const CreateAccount = () => {
                 label="Password"
                 type="password"
                 id="password"
-                autoComplete="current-password"
+                onChange={handleChange}
+                value={user.password}
               />
             </Box>
           <Button 
-          onClick={createUserWithPassword}
+          onClick={handleSubmit}
           variant="contained"
           color='primary'
           size="large"

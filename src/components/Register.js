@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Redirect } from "react-router";
+import { Redirect, useHistory } from "react-router-dom";
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -9,6 +9,7 @@ import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 
 const Register = ({createClient}) => {
+  const history = useHistory();
   const [formState, setFormState] = useState({
     acct: 'client',
     f_name: '',
@@ -25,9 +26,9 @@ const Register = ({createClient}) => {
       }));
     };
 
-    const handleSumbit = (event) => {
+    const handleSumbit = async (event) => {
       event.preventDefault();
-      createClient(formState);
+      await createClient(formState);
       setFormState({
         acct: 'client',
         f_name: '',
@@ -35,6 +36,7 @@ const Register = ({createClient}) => {
         email: '',
         therapist: [],
       })
+      history.push('/dashboard');
     }
 
     return (

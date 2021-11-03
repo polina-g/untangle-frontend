@@ -1,4 +1,6 @@
 import { signIn, signInWithPassword } from '../services/firebase';
+import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
@@ -12,6 +14,24 @@ import Avatar from '@mui/material/Avatar';
 import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 
 const Login = () => {
+  const history = useHistory();
+  const [user, setUser] = useState({
+    email: '',
+    password: ''
+  })
+
+  const handleChange = (event) => {
+    setUser((prevState) => ({
+      ...prevState,
+      [event.target.name]: event.target.value 
+    }));
+  }
+
+  const handleSubmit = () => {
+    signInWithPassword(user.email, user.password)
+    history.push('/dashboard')
+  }
+
     return (
     <Box 
       sx={{
@@ -50,6 +70,8 @@ const Login = () => {
                 name="email"
                 autoComplete="email"
                 autoFocus
+                onChange={handleChange}
+                value={user.email}
               />
               <TextField
                 margin="normal"
@@ -60,10 +82,12 @@ const Login = () => {
                 type="password"
                 id="password"
                 autoComplete="current-password"
+                onChange={handleChange}
+                value={user.password}
               />
             </Box>
           <Button 
-          onClick={signInWithPassword}
+          onClick={handleSubmit}
           variant="contained"
           color='primary'
           size="large"
