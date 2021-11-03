@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Redirect, useHistory } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
@@ -9,8 +9,6 @@ import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
 
 const Register = ({createClient, user, setClient}) => {
-  console.log(setClient);
-  const history = useHistory();
   const [newClient, setNewClient] = useState(user);
   const [formState, setFormState] = useState({
     acct: 'client',
