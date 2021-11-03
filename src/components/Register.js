@@ -14,9 +14,13 @@ import FormControl from "@mui/material/FormControl";
 const Register = ({createClient, createTherapist, user, setClient, clientType}) => {
     return (
       clientType === 'client' ? <RegisterClient user={user} 
-                                                createClient={createClient}/> 
+                                                createClient={createClient}
+                                                setClient={setClient}
+                                                /> 
                               : <RegisterTherapist user={user} 
-                                                    createTherapist={createTherapist}/>
+                                                    createTherapist={createTherapist}
+                                                    setClient={setClient}
+                                                    />
     );
   };
 
