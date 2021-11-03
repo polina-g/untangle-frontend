@@ -170,6 +170,7 @@ function App() {
               <Dashboard 
                 data={entries} 
                 createClient={createClient}
+                createTherapist={createTherapist}
                 createEntry={createEntry}
                 token={token}
                 user={user}

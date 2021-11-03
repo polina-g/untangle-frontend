@@ -10,7 +10,7 @@ import Typography from '@mui/material/Typography';
 
 const {REACT_APP_CLIENT_URL} = process.env;
 
-const Dashboard = ({data, createClient, createEntry, token, user, clientType}) => {
+const Dashboard = ({data, createClient, createTherapist, createEntry, token, user, clientType}) => {
   const [client, setClient] = useState([])
   const [response, setResponse] = useState(null);
 
@@ -60,7 +60,7 @@ const Dashboard = ({data, createClient, createEntry, token, user, clientType}) =
         </StyledDashBoardTop>
         <EntryTable data={data} token={token} dashboard/>
       </main>
-    : <Register createClient={createClient} user={user} setClient={setClient} clientType={clientType} /> 
+    : <Register createClient={createClient} createTherapist={createTherapist} user={user} setClient={setClient} clientType={clientType} /> 
     );
   };
 
