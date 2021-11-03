@@ -43,8 +43,8 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
     }
   };
 
-    const handleDelete = () => {
-      deleteEntry(id);
+    const handleDelete = async () => {
+      await deleteEntry(id);
       history.push('/dashboard');
     }
 

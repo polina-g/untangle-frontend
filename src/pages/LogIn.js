@@ -1,4 +1,3 @@
-import { StyledMain } from '../styles'
 import { signIn } from '../services/firebase';
 
 import Button from '@mui/material/Button';
@@ -8,11 +7,10 @@ import Typography from '@mui/material/Typography';
 import TextField from '@mui/material/TextField';
 
 import GoogleIcon from '@mui/icons-material/Google';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
 
-const Login = (props) => {
+const Login = () => {
     return (
     <Box 
       sx={{

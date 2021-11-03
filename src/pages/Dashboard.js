@@ -14,7 +14,6 @@ const Dashboard = ({data, createClient, createEntry, token}) => {
  
   const [client, setClient] = useState([])
   const [response, setResponse] = useState(null);
-  console.log(client);
 
   const checkIfClient = async () => {
     const response = await fetch(REACT_APP_CLIENT_URL+'/client', {

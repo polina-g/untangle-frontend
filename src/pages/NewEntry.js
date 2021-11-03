@@ -22,9 +22,9 @@ const NewEntry = (props) => {
   }, [])
 
   //Form helper functions
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    props.createEntry(formState);
+    await props.createEntry(formState);
     setFormState({
       feeling: 0,
       emotion: '',
@@ -34,11 +34,12 @@ const NewEntry = (props) => {
       situation: '',
       private: false
     });
+    history.push('/dashboard');
   };
 
-  const handleUpdate = (event) => {
+  const handleUpdate = async (event) => {
     event.preventDefault();
-    props.updateEntry(formState, props.id);
+    await props.updateEntry(formState, props.id);
     setFormState({
       feeling: 0,
       emotion: '',
