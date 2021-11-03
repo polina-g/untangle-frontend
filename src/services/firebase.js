@@ -1,3 +1,4 @@
+import { AirTwoTone } from '@mui/icons-material';
 import firebase from 'firebase/app';
 import 'firebase/auth';
 
@@ -23,9 +24,20 @@ function logOut() {
     auth.signOut();
 }
 
+function createUserWithPassword(email, password) {
+    auth.createUserWithEmailAndPassword(email, password)
+}
+
+function signInWithPassword(email, password) {
+    auth.signInWithEmailAndPassword(email, password)
+}
+
+
 export {
     auth,
     signIn,
     logOut,
+    createUserWithPassword,
+    signInWithPassword,
 }
 

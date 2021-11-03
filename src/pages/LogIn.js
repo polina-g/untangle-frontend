@@ -1,4 +1,4 @@
-import { signIn } from '../services/firebase';
+import { signIn, signInWithPassword } from '../services/firebase';
 
 import Button from '@mui/material/Button';
 import Paper from '@mui/material/Paper';
@@ -9,6 +9,7 @@ import TextField from '@mui/material/TextField';
 import GoogleIcon from '@mui/icons-material/Google';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Avatar from '@mui/material/Avatar';
+import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
 
 const Login = () => {
     return (
@@ -61,6 +62,19 @@ const Login = () => {
                 autoComplete="current-password"
               />
             </Box>
+          <Button 
+          onClick={signInWithPassword}
+          variant="contained"
+          color='primary'
+          size="large"
+          sx={{mb: 2, mt: 2}}
+        >
+        <LockOpenOutlinedIcon 
+          sx={{mr:3}}
+        />  
+          Log In
+          </Button>
+          OR
           <Button 
           onClick={signIn}
           variant="contained"
