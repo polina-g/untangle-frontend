@@ -180,7 +180,6 @@ const RegisterTherapist = ({createTherapist, user, setClient}) => {
                 Register!
               </Button>
             </FormControl>
-          <Redirect to="/dashboard" />
           </form>
         </Paper>
       </Box>
