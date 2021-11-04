@@ -10,7 +10,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 
-const AddTherapist = ({client, therapists}) => {
+const AddTherapist = ({client, therapists, addTherapist}) => {
   const [formState, setFormState] = useState({
     therapist: ''
   })
@@ -27,7 +27,7 @@ const AddTherapist = ({client, therapists}) => {
   };
 
   const handleSubmit = () => {
-    console.log('yay');
+    addTherapist(formState.therapist);
   }
 
   const noTherapists = () => {

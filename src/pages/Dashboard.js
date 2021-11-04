@@ -31,6 +31,20 @@ const Dashboard = ({data, createClient, createTherapist, createEntry, token, use
     });    
   };
 
+  const addTherapist = async (id) => {
+    if(!user) return;
+    const data = {therapistId: id};
+    token = await user.getIdToken();
+    await fetch(REACT_APP_CLIENT_URL+'/client', {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'Application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(data)
+    });
+  };
+
   async function check () {
     await checkIfClient();
     if(clientType === 'client') {
@@ -67,7 +81,7 @@ const Dashboard = ({data, createClient, createTherapist, createEntry, token, use
         >
         Hi {client[0].f_name}, what would you like to do today?
         </Typography>
-        <AddTherapist client={client} therapists={therapists}/>
+        <AddTherapist client={client} therapists={therapists} addTherapist={addTherapist}/>
         <StyledDashBoardTop>
           <DashBox title="Create New Entry" token={token} createEntry={createEntry} link="/entries/new" color='success'/>
           <DashBox title="View All Entries" token={token} data={data} link="/entries" color='primary'/>
