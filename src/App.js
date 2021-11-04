@@ -16,9 +16,10 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import { auth } from './services/firebase';
-const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL} = process.env;
+const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL, REACT_APP_THERAPIST_URL} = process.env;
 let token;
 
+console.log(REACT_APP_THERAPIST_URL);
 function App() {
   const [ user, setUser ] = useState(null);
   const [ entries, setEntries ] = useState([])
@@ -72,11 +73,14 @@ function App() {
       });
     };
 
+    //===================THERAPIST FUNCTIONS========================
     const createTherapist = async (person) => {
+      console.log('this is create therapist')
       if(!user) return;
       const data = {...person, managedBy: user.uid};
       token = await user.getIdToken();
-      await fetch(REACT_APP_CLIENT_URL, {
+      console.log(data, token);
+      await fetch(REACT_APP_THERAPIST_URL, {
         method: 'POST',
         headers: {
           'Content-type': 'Application/json',

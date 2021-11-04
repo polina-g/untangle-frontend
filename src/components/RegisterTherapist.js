@@ -19,6 +19,7 @@ const RegisterTherapist = ({createTherapist, user, setClient}) => {
     f_name: '',
     l_name: '',
     email: newClient.email,
+    license: '',
     city: '',
     state: '',
   });
@@ -107,6 +108,7 @@ const RegisterTherapist = ({createTherapist, user, setClient}) => {
                     value={formState.license}
                     label="License"
                     onChange={handleChange}
+                    name='license'
                 >
                     <MenuItem value='None'>None</MenuItem>
                     <MenuItem value='Licensed Psychologist'>Licensed Psychologist</MenuItem>

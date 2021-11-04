@@ -11,6 +11,8 @@ import Typography from '@mui/material/Typography';
 const {REACT_APP_CLIENT_URL} = process.env;
 
 const Dashboard = ({data, createClient, createTherapist, createEntry, token, user, clientType}) => {
+  console.log(token);
+  console.log(user.uid);
   const [client, setClient] = useState([])
   const [response, setResponse] = useState(null);
 
