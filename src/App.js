@@ -3,7 +3,7 @@ import {Route, Switch, Redirect } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Landing from './pages/Landing'
-import Login from './pages/Login'
+import Login from './pages/LogIn'
 import CreateAccount from './pages/CreateAccount';
 import Dashboard from './pages/Dashboard';
 import NewEntry from './pages/NewEntry';
