@@ -23,6 +23,7 @@ console.log(REACT_APP_THERAPIST_URL);
 function App() {
   const [ user, setUser ] = useState(null);
   const [ entries, setEntries ] = useState([])
+  const [ therapists, setTherapists ] = useState(null)
   const [ clientType, setClientType] = useState(null);
   const fetchData = useRef(null);
 
@@ -90,6 +91,19 @@ function App() {
       });
     };
 
+    const getTherapists = async () => {
+      if(!user) return;
+      token = await user.getIdToken();
+      const response = await fetch(REACT_APP_THERAPIST_URL, {
+        method: 'GET',
+        headers: {
+          'Authorization': 'Bearer ' + token
+        }
+      });
+      const data = await response.json();
+      setTherapists(data);
+    }
+
     //=============== ENTRY FUNCTIONS=================
     const createEntry = async (entry) => {
       if(!user) return;
@@ -146,7 +160,6 @@ function App() {
           setEntries([]);
         }
       });
-
       return () => unsubscribe();
     }, [user]);
 
@@ -179,6 +192,9 @@ function App() {
                 token={token}
                 user={user}
                 clientType={clientType}
+                therapists={therapists}
+                getTherapists={getTherapists}
+                setClientType={setClientType}
               /> : 
               <Redirect to="/login" />
             )} />

@@ -7,12 +7,12 @@ import { StyledDashBoardTop } from '../styles';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+import AddTherapist from '../components/AddTherapist';
 
 const {REACT_APP_CLIENT_URL} = process.env;
 
-const Dashboard = ({data, createClient, createTherapist, createEntry, token, user, clientType}) => {
-  console.log(token);
-  console.log(user.uid);
+const Dashboard = ({data, createClient, createTherapist, createEntry, token, user, clientType, therapists, getTherapists, setClientType}) => {
+
   const [client, setClient] = useState([])
   const [response, setResponse] = useState(null);
 
@@ -26,12 +26,16 @@ const Dashboard = ({data, createClient, createTherapist, createEntry, token, use
     response.json().then(foundClient => {
       setResponse('true');
       setClient(foundClient);
+      setClientType(foundClient[0].acct)
     });    
   };
 
-  useEffect(() => {
-    checkIfClient();
-  }, [token]);
+  useEffect(async () => {
+    await checkIfClient();
+    if(clientType === 'client') {
+      getTherapists();
+    };
+  }, [token, clientType]);
 
   const loading = () => {
     return (
@@ -47,14 +51,14 @@ const Dashboard = ({data, createClient, createTherapist, createEntry, token, use
     return (
     client.length ? 
       <main>
-          <Typography
-            variant="h2"
-            color='primary'
-            sx={{mt: 5}}
-          >
-          Hi {client[0].f_name}, what would you like to do today?
-          </Typography>
-        <h1></h1>
+        <Typography
+          variant="h2"
+          color='primary'
+          sx={{mt: 5}}
+        >
+        Hi {client[0].f_name}, what would you like to do today?
+        </Typography>
+        <AddTherapist client={client} therapists={therapists}/>
         <StyledDashBoardTop>
           <DashBox title="Create New Entry" token={token} createEntry={createEntry} link="/entries/new" color='success'/>
           <DashBox title="View All Entries" token={token} data={data} link="/entries" color='primary'/>

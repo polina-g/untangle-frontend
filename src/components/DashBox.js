@@ -6,7 +6,6 @@ import Box from '@mui/material/Box'
 import Paper from "@mui/material/Paper";
 
 const DashBox = ({title, link, color}) => {
-    console.log(color);
     return (
     <Box
         sx={{
