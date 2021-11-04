@@ -13,24 +13,22 @@ import Button from "@mui/material/Button";
 const AddTherapist = ({client, therapists, addTherapist}) => {
   const [formState, setFormState] = useState({
     therapist: ''
-  })
+  });
 
   useEffect(() => {}, [client, therapists]);
 
-  console.log(therapists);
-
+  const noTherapists = () => {
   const handleChange = (event) => {
     setFormState(prevState => ({
       ...prevState,
       [event.target.name]: event.target.value
     }));
   };
-
-  const handleSubmit = () => {
-    addTherapist(formState.therapist);
-  }
-
-  const noTherapists = () => {
+  
+    const handleSubmit = () => {
+      addTherapist(formState.therapist);
+    }
+    
     const therapistOptions = therapists.map((therapist, index) => {
       return(
         <MenuItem 
@@ -77,6 +75,7 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
     );
   }
   const showTherapist = () => {
+    const currentTherapist = therapists.find(therapist => therapist._id === '');
     return(
       <h1>You therapist is...</h1>
       );

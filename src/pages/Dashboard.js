@@ -11,38 +11,27 @@ import AddTherapist from '../components/AddTherapist';
 
 const {REACT_APP_CLIENT_URL} = process.env;
 
-const Dashboard = ({data, createClient, createTherapist, createEntry, token, user, clientType, therapists, getTherapists, setClientType}) => {
+const Dashboard = ({user, data, therapists, clientType, setClientType, getTherapists, createTherapist, createEntry, createClient,}) => {
 
   const [client, setClient] = useState([])
-  const [response, setResponse] = useState(null);
   const fetchData = useRef(null);
 
   const checkIfClient = async () => {
+    const token = await user.getIdToken();
     const response = await fetch(REACT_APP_CLIENT_URL+'/client', {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token
       }
     });
-    response.json().then(foundClient => {
-      setResponse('true');
-      setClient(foundClient);
-      setClientType(foundClient[0].acct)
-    });    
-  };
 
-  const addTherapist = async (id) => {
-    if(!user) return;
-    const data = {therapistId: id};
-    token = await user.getIdToken();
-    await fetch(REACT_APP_CLIENT_URL+'/client', {
-      method: 'PUT',
-      headers: {
-        'Content-type': 'Application/json',
-        'Authorization': 'Bearer ' + token
-      },
-      body: JSON.stringify(data)
-    });
+    response.json().then(foundClient => {
+      console.log(foundClient);
+      setClient(foundClient);
+      if (foundClient.length) {
+        setClientType(foundClient[0].acct);
+      } 
+    });    
   };
 
   async function check () {
@@ -58,7 +47,21 @@ const Dashboard = ({data, createClient, createTherapist, createEntry, token, use
 
   useEffect(() => {
       fetchData.current();
-  }, [token, clientType]);
+  }, [user]);
+
+  const addTherapist = async (id) => {
+    if(!user) return;
+    const data = {therapistId: id};
+    const token = await user.getIdToken();
+    await fetch(REACT_APP_CLIENT_URL+'/client', {
+      method: 'PUT',
+      headers: {
+        'Content-type': 'Application/json',
+        'Authorization': 'Bearer ' + token
+      },
+      body: JSON.stringify(data)
+    });
+  };
 
   const loading = () => {
     return (
@@ -83,17 +86,17 @@ const Dashboard = ({data, createClient, createTherapist, createEntry, token, use
         </Typography>
         <AddTherapist client={client} therapists={therapists} addTherapist={addTherapist}/>
         <StyledDashBoardTop>
-          <DashBox title="Create New Entry" token={token} createEntry={createEntry} link="/entries/new" color='success'/>
-          <DashBox title="View All Entries" token={token} data={data} link="/entries" color='primary'/>
-          <DashBox title="Resources / Helpful Tips" link="/" token={token} color='secondary'/>
+          <DashBox title="Create New Entry" createEntry={createEntry} link="/entries/new" color='success'/>
+          <DashBox title="View All Entries" data={data} link="/entries" color='primary'/>
+          <DashBox title="Resources / Helpful Tips" link="/" color='secondary'/>
         </StyledDashBoardTop>
-        <EntryTable data={data} token={token} dashboard/>
+        <EntryTable data={data} dashboard/>
       </main>
     : <Register createClient={createClient} createTherapist={createTherapist} user={user} setClient={setClient} clientType={clientType} /> 
     );
   };
 
-  return response ? loaded() : loading()
+  return user ? loaded() : loading()
   };
 
   export default Dashboard;

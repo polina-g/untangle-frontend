@@ -18,9 +18,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import { auth } from './services/firebase';
 
 const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL, REACT_APP_THERAPIST_URL} = process.env;
-let token;
 
-console.log(REACT_APP_THERAPIST_URL);
 function App() {
   const [ user, setUser ] = useState(null);
   const [ entries, setEntries ] = useState([])
@@ -49,7 +47,7 @@ function App() {
   //========== GET DATA ============================
   const getEntries = async () => {
     if(!user) return;
-    token = await user.getIdToken();
+    const token = await user.getIdToken();
     const response = await fetch(REACT_APP_BASE_URL, {
       method: 'GET',
       headers: {
@@ -64,7 +62,7 @@ function App() {
     const createClient = async (person) => {
       if(!user) return;
       const data = {...person, managedBy: user.uid};
-      token = await user.getIdToken();
+      const token = await user.getIdToken();
       await fetch(REACT_APP_CLIENT_URL, {
         method: 'POST',
         headers: {
@@ -80,7 +78,7 @@ function App() {
       console.log('this is create therapist')
       if(!user) return;
       const data = {...person, managedBy: user.uid};
-      token = await user.getIdToken();
+      const token = await user.getIdToken();
       console.log(data, token);
       await fetch(REACT_APP_THERAPIST_URL, {
         method: 'POST',
@@ -94,13 +92,14 @@ function App() {
 
     const getTherapists = async () => {
       if(!user) return;
-      token = await user.getIdToken();
+      const token = await user.getIdToken();
       const response = await fetch(REACT_APP_THERAPIST_URL, {
         method: 'GET',
         headers: {
           'Authorization': 'Bearer ' + token
         }
       });
+
       const data = await response.json();
       setTherapists(data);
     }
@@ -109,7 +108,7 @@ function App() {
     const createEntry = async (entry) => {
       if(!user) return;
       const data = {...entry, client: user.uid};
-      token = await user.getIdToken();
+      const token = await user.getIdToken();
       await fetch(REACT_APP_BASE_URL, {
         method: 'POST',
         headers: {
@@ -124,7 +123,7 @@ function App() {
     const updateEntry = async (entry, id) => {
       if(!user) return;
       const data = {...entry, client: user.uid};
-      token = await user.getIdToken();
+      const token = await user.getIdToken();
       await fetch(REACT_APP_BASE_URL+'/'+id, {
         method: 'PUT',
         headers: {
@@ -137,7 +136,7 @@ function App() {
     };
 
     const deleteEntry = async (id) => {
-      let token = await user.getIdToken();
+      const token = await user.getIdToken();
       await fetch(REACT_APP_BASE_URL+'/'+id, {
         method: 'DELETE',
         headers: {
@@ -172,7 +171,7 @@ function App() {
           user={user} 
           data={entries}
           createEntry={createEntry}
-          token={token} />
+        />
         <Switch>
           <Route exact path="/">
             <Landing />
@@ -180,9 +179,9 @@ function App() {
           <Route path="/login" render={() => (
               user ? <Redirect to="/dashboard" /> : <LogIn />
             )} />
-          <Route path="/register">
-            <CreateAccount setClientType={setClientType}/>
-          </Route>
+          <Route path="/register"  render={() => (
+            user ? <Redirect to="/dashboard" /> : <CreateAccount setClientType={setClientType} />
+          )}/>
           <Route path="/dashboard" render={() => (
             user ? 
               <Dashboard 
@@ -190,7 +189,6 @@ function App() {
                 createClient={createClient}
                 createTherapist={createTherapist}
                 createEntry={createEntry}
-                token={token}
                 user={user}
                 clientType={clientType}
                 therapists={therapists}
