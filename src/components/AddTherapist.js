@@ -41,23 +41,26 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
       );
     })
     return(    
-      <Box width='80%' sx={{ml:'10%', mt:5}}>
-        <Paper width='100%' elevation={8} sx={{p:5}}>
-          <Typography
-          variant="h5"
-          color='primary'
-          textAlign='left'
-          >
-          Looks like you haven't added a therapist yet!
-          </Typography>
-          <FormControl>
-              <InputLabel>Chose a Therapist:</InputLabel>
+      <Box width='70%' sx={{ml:'15%', mt:5}}>
+        <Paper width='100%' elevation={8} sx={{p:5, display:'flex', justifyContent:'center', alignItems:'center'}}>
+          <Box sx={{width:'50%', mr:3}}>
+            <Typography
+            variant="h4"
+            color='primary'
+            textAlign='center'
+            >
+            Looks like you haven't added a therapist yet!
+            </Typography>
+          </Box>
+          <Box sx={{flex:1}}>
+          <FormControl sx={{width:'100%'}}>
+              <InputLabel>Find Your Therapist:</InputLabel>
                 <Select
                     value={formState.therapist}
                     label="Therapists"
                     onChange={handleChange}
                     name='therapist'
-                    sx={{width:'100%'}}
+                    sx={{width:'100%', mb:2}}
                 >
                     {therapistOptions}
                 </Select>
@@ -65,11 +68,12 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
                   type="button" 
                   variant="contained" 
                   onClick={handleSubmit}
-                  sx={{ width:'100%'}}
+                  sx={{ width:'50%', ml:'25%'}}
                   >
                   Add Therapist
                 </Button>
             </FormControl>
+          </Box>
         </Paper>
     </Box>
     );
