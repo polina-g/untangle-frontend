@@ -109,7 +109,7 @@ const Login = () => {
         <GoogleIcon 
           sx={{mr:3}}
         />  
-          Sign in with Google
+          Log in with Google
         </Button>
       </Paper>
     </Box>

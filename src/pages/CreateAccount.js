@@ -91,17 +91,17 @@ const CreateAccount = ({setClientType}) => {
                 value={user.password}
               />
             </Box>
-        <RadioGroup row>
+        <RadioGroup row > 
           <FormControlLabel 
             value="client" 
-            control={<Radio />}
+            control={<Radio required={true}/>}
             onChange={handleClientChoice}
             label='I am a client'
             labelPlacement='top'
           />
           <FormControlLabel 
             value="therapist" 
-            control={<Radio />}
+            control={<Radio required={true}/>}
             onChange={handleClientChoice}
             label='I am a Therapist'
             labelPlacement='top'
@@ -130,7 +130,7 @@ const CreateAccount = ({setClientType}) => {
         <GoogleIcon 
           sx={{mr:3}}
         />  
-          Sign in with Google
+          Create Account with Google
         </Button>
       </Paper>
     </Box>

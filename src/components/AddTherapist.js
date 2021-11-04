@@ -18,12 +18,12 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
   useEffect(() => {}, [client, therapists]);
 
   const noTherapists = () => {
-  const handleChange = (event) => {
-    setFormState(prevState => ({
-      ...prevState,
-      [event.target.name]: event.target.value
-    }));
-  };
+    const handleChange = (event) => {
+      setFormState(prevState => ({
+        ...prevState,
+        [event.target.name]: event.target.value
+      }));
+    };
   
     const handleSubmit = () => {
       addTherapist(formState.therapist);
@@ -42,7 +42,7 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
     })
     return(    
       <Box width='80%' sx={{ml:'10%', mt:5}}>
-        <Paper className='AddTherapistBox' width='100%' elevation={8} sx={{p:5}}>
+        <Paper width='100%' elevation={8} sx={{p:5}}>
           <Typography
           variant="h5"
           color='primary'
@@ -75,9 +75,33 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
     );
   }
   const showTherapist = () => {
-    const currentTherapist = therapists.find(therapist => therapist._id === '');
+    const therapistId = client[0].therapist[0];
+    const foundTherapist = therapists.find(therapist => therapist._id === therapistId);
+
     return(
-      <h1>You therapist is...</h1>
+      <Box width='50%' sx={{ml:'25%', mt:5}}>
+        <Paper width='100%' elevation={8} sx={{p:5, display:'flex'}}>
+          <Typography
+            variant="h4"
+            color='primary'
+            textAlign='center'
+            sx={{width:"30%"}}
+            >
+            Your Therapist: 
+          </Typography>
+          <Box sx={{ flexGrow:1, display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+            <Avatar alt={foundTherapist.f_name} src={foundTherapist.img} />
+            <Typography
+              variant="h5"
+              color='primary'
+              textAlign='left'
+              >
+            {foundTherapist.f_name} {foundTherapist.l_name}, {foundTherapist.city}, {foundTherapist.state} 
+            </Typography>
+            
+          </Box>
+        </Paper>
+      </Box>
       );
   };
   
@@ -92,7 +116,7 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
   }
 
   const loaded = () => {
-    return client[0].therapist.length ? showTherapist() : noTherapists()
+    return client[0]?.therapist.length ? showTherapist() : noTherapists()
   }
 
     return (client && therapists) ? loaded() : loading();

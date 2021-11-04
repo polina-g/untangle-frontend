@@ -23,7 +23,7 @@ function App() {
   const [ user, setUser ] = useState(null);
   const [ entries, setEntries ] = useState([])
   const [ therapists, setTherapists ] = useState(null)
-  const [ clientType, setClientType] = useState(null);
+  const [ clientType, setClientType] = useState('client');
   const fetchData = useRef(null);
 
   const theme = createTheme({
