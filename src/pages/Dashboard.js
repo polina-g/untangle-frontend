@@ -12,8 +12,8 @@ import AddTherapist from '../components/AddTherapist';
 const {REACT_APP_CLIENT_URL} = process.env;
 
 const Dashboard = ({user, data, therapists, clientType, setClientType, getTherapists, createTherapist, createEntry, createClient,}) => {
-
   const [client, setClient] = useState([])
+  const [isTherapistChosen, setIsTherapistChosen] = useState(null)
   const fetchData = useRef(null);
 
   const checkIfClient = async () => {
@@ -49,6 +49,8 @@ const Dashboard = ({user, data, therapists, clientType, setClientType, getTherap
       fetchData.current();
   }, [user]);
 
+  useEffect(() => {console.log(isTherapistChosen)}, [isTherapistChosen])
+
   const addTherapist = async (id) => {
     if(!user) return;
     const data = {therapistId: id};
@@ -61,6 +63,7 @@ const Dashboard = ({user, data, therapists, clientType, setClientType, getTherap
       },
       body: JSON.stringify(data)
     });
+    window.location.reload();
   };
 
   const loading = () => {

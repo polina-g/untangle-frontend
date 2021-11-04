@@ -116,7 +116,7 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
   }
 
   const loaded = () => {
-    return client[0]?.therapist.length ? showTherapist() : noTherapists()
+    return client[0]?.therapist?.length ? showTherapist() : noTherapists()
   }
 
     return (client && therapists) ? loaded() : loading();
