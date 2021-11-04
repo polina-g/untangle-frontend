@@ -40,7 +40,7 @@ const Login = () => {
       }}
     >   
         <Paper sx={{width:'70%'}}>
-          <img src="https://i.imgur.com/dAi63Ss.png" width="100%"/>
+          <img src="https://i.imgur.com/dAi63Ss.png" width="100%" alt='drawing of two joyful people with flowers and sun in the background'/>
         </Paper>
         <Paper 
           sx={{

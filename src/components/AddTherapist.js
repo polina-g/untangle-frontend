@@ -53,27 +53,25 @@ const AddTherapist = ({client, therapists}) => {
           Looks like you haven't added a therapist yet!
           </Typography>
           <FormControl>
-              <InputLabel id="demo-simple-select-label">Chose a Therapist:</InputLabel>
+              <InputLabel>Chose a Therapist:</InputLabel>
                 <Select
-                    labelId="demo-simple-select-label"
                     value={formState.therapist}
                     label="Therapists"
-                    fullwidth
                     onChange={handleChange}
                     name='therapist'
-                    sx={{width:'300px'}}
+                    sx={{width:'100%'}}
                 >
                     {therapistOptions}
                 </Select>
+                <Button 
+                  type="button" 
+                  variant="contained" 
+                  onClick={handleSubmit}
+                  sx={{ width:'100%'}}
+                  >
+                  Add Therapist
+                </Button>
             </FormControl>
-            <Button 
-                type="button" 
-                variant="contained" 
-                onClick={handleSubmit}
-                sx={{ width:'30%'}}
-              >
-                Add Therapist
-              </Button>
         </Paper>
     </Box>
     );

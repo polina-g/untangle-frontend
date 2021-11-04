@@ -40,7 +40,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               value="1" 
               control={<Radio />}
               onChange={handleChange}
-              label={<img src='https://i.imgur.com/kj80WQP.png'/>}
+              label={<img src='https://i.imgur.com/kj80WQP.png' alt='smile face 1'/>}
               labelPlacement='top'
               name="feeling"
               checked={formState.feeling==1}
@@ -49,7 +49,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               value="2" 
               control={<Radio />}
               onChange={handleChange}
-              label={<img src='https://i.imgur.com/dPeJdMK.png' />}
+              label={<img src='https://i.imgur.com/dPeJdMK.png' alt='smile face 2'/>}
               labelPlacement='top'
               name="feeling"
               checked={formState.feeling==2}
@@ -58,7 +58,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               value="3" 
               control={<Radio />}
               onChange={handleChange}
-              label={<img src='https://i.imgur.com/X3Oeeja.png'/>}
+              label={<img src='https://i.imgur.com/X3Oeeja.png' alt='smile face 3'/>}
               labelPlacement='top'
               name="feeling"
               checked={formState.feeling==3}
@@ -67,7 +67,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               value="4" 
               control={<Radio />}
               onChange={handleChange}
-              label={<img src='https://i.imgur.com/Wkm4rbM.png'/>}
+              label={<img src='https://i.imgur.com/Wkm4rbM.png' alt='smile face 4'/>}
               labelPlacement='top'
               name="feeling"
               checked={formState.feeling==4}
@@ -76,7 +76,7 @@ const EntryForm = ({handleChange, handleSubmit, formState, isEdit}) => {
               value="5" 
               control={<Radio />}
               onChange={handleChange}
-              label={<img src='https://i.imgur.com/9DlOwAL.png'/>}
+              label={<img src='https://i.imgur.com/9DlOwAL.png' alt='smile face 5'/>}
               labelPlacement='top'
               name="feeling"
               checked={formState.feeling==5}

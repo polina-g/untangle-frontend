@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import NewEntry from './NewEntry';
 
@@ -11,13 +11,13 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Button from '@mui/material/Button';
-import EmojiEmotionsIcon from '@mui/icons-material/EmojiEmotions';
 
 const ViewEntry = ({updateEntry, deleteEntry, data}) => {
   const {id} = useParams();
   const history = useHistory();
   const [ entry, setEntry ] = useState(null);
   const [ action, setAction ] = useState('view')
+  const fetchData = useRef(null);
 
   //Smiley face images:
   const images = ['https://i.imgur.com/kj80WQP.png', 
@@ -68,7 +68,7 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
                 primary={entry.formattedDate}
               />
               <ListItemIcon>
-                <img src={images[entry.feeling-1]} />
+                <img src={images[entry.feeling-1]} alt='feeling smiley face'/>
               </ListItemIcon>
             </ListItem>
           </Box>
@@ -159,8 +159,13 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
   }
 
   useEffect(() => {
-    getEntry();
+    fetchData.current = getEntry;
+  });
+
+  useEffect(() => {
+    fetchData.current();
   }, [data]);
+
 
   return entry ? loaded() : loading();
 };

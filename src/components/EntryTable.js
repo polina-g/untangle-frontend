@@ -1,6 +1,4 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
-
 //Material UI imports
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -14,8 +12,6 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/system/Box';
 
 const EntryTable = ({data, dashboard}) => {
-  const [entries, setEntries] = useState(data);
-
   const loading = () => {
     return <h1>Loading</h1>
   }
@@ -40,7 +36,7 @@ const EntryTable = ({data, dashboard}) => {
     >
     Click "Create New Entry" to add your first one!
     </Typography>
-      <img src="https://i.imgur.com/qs9rHvq.png" width="80%" />
+      <img src="https://i.imgur.com/qs9rHvq.png" width="80%" alt='confused people'/>
     </Box>
     );
   }
@@ -64,7 +60,7 @@ const EntryTable = ({data, dashboard}) => {
           </TableHead>
           <TableBody>
           {
-          entries.map((entry, index) => {
+          data.map((entry, index) => {
             if (dashboard && index > 4) return null;
             const { createdAt, feeling, emotion, thought } = entry;
             const date = new Date(createdAt);
@@ -102,10 +98,10 @@ const EntryTable = ({data, dashboard}) => {
   }
 
   const loaded = () => {
-    return entries.length ? showEntries() : noEntries()
+    return data.length ? showEntries() : noEntries()
   };
 
-    return entries ? loaded() : loading()
+    return data ? loaded() : loading()
   };
 
   export default EntryTable;

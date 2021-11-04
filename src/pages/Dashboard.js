@@ -1,7 +1,7 @@
 import DashBox from '../components/DashBox';
 import Register from '../components/Register';
 import EntryTable from '../components/EntryTable';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { StyledDashBoardTop } from '../styles';
 
 import Skeleton from '@mui/material/Skeleton';
@@ -15,6 +15,7 @@ const Dashboard = ({data, createClient, createTherapist, createEntry, token, use
 
   const [client, setClient] = useState([])
   const [response, setResponse] = useState(null);
+  const fetchData = useRef(null);
 
   const checkIfClient = async () => {
     const response = await fetch(REACT_APP_CLIENT_URL+'/client', {
@@ -30,11 +31,19 @@ const Dashboard = ({data, createClient, createTherapist, createEntry, token, use
     });    
   };
 
-  useEffect(async () => {
+  async function check () {
     await checkIfClient();
     if(clientType === 'client') {
       getTherapists();
     };
+  };
+
+  useEffect(() => {
+    fetchData.current = check;
+  });
+
+  useEffect(() => {
+      fetchData.current();
   }, [token, clientType]);
 
   const loading = () => {

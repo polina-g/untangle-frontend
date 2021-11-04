@@ -19,7 +19,7 @@ const NewEntry = (props) => {
     if(props.status === 'edit') {
       setFormState(props.data)
     }
-  }, [])
+  }, [props.status, props.data]);
 
   //Form helper functions
   const handleSubmit = async (event) => {

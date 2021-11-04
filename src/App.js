@@ -16,6 +16,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 
 import { auth } from './services/firebase';
+
 const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL, REACT_APP_THERAPIST_URL} = process.env;
 let token;
 

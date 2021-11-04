@@ -46,7 +46,7 @@ const CreateAccount = ({setClientType}) => {
       }}
     >   
         <Paper sx={{width:'70%'}}>
-          <img src="https://i.imgur.com/feD6gWb.jpg" width="100%"/>
+          <img src="https://i.imgur.com/feD6gWb.jpg" width="100%" alt='smiley faces on sticky notes'/>
         </Paper>
         <Paper 
           sx={{
