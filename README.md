@@ -1,70 +1,76 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# WELCOME TO UNTANGLE
+![screenshot 1](https://i.imgur.com/vpSESO7.png)
+As a clinical psychologist turned sofrware engineer, I have always been passionate about the mental health field along with the most meaningful, evidence based and effective practices it has to offer. With the skills and tools I have gained in my journey as a developer, I was inspired to create a website that not only meets requirements and showcases my aquired skills, but which also provides a useful tool for mental health professionals and their clients. In my years of working in the feild I have felt a gap in communication between client and therapists: therapists only see what the client presents during a weekly one hour session, and clients often are too embarassed to be truthful and honest about their experiences. This can often prolong the amount of time needed for the therapist to provide useful and effective intervetions, and when talking about someone's mental health - very often every single week matters.  
 
-## Available Scripts
+More specifically, cognitive behavioral therapists often rely on clients filling out CBT journals in the time between their sessions, where they log their feelings, thoughts and emotions throughout the week. This information is invaluable to the therapist and is often vital to successful treatement. Having to once fill out one of these journals myself, I can confidently say that many times this assignment is skipped or done haphazardly due to the inconvenience of the task. Untange provides a convenient and quick way for clients to record their negative thought patterns on the go! Not only that - Untangle also provides a platform for therapists as well: mental health professionals can creare their own accounts and connect with their clients, seeing their new journal posts in real time! 
 
-In the project directory, you can run:
+I trult believe Untangle can be the perfect solution to succesful and, most importantly, helpful therapeutic work between a client and their therapist. Feel free to take a peek inside!
 
-### `npm start`
+# Technologies Used 
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- HTML5
+- CSS3
+- JavaScript
+- React
+- Node.js
+- Express
+- MongoDB and Mongoose
+- Materialize UI
+- Google Firebase
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# Screenshots
+### Sign Up Pafe
+![screenshot 1](src/images/signup.png)
 
-### `npm test`
+### Login Page
+![screenshot 2](src/images/login.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Client's registration page
+![screenshot 2](src/images/client_register.png)
 
-### `npm run build`
+### Therapist Registration Page
+![screenshot 2](src/images/therapist_register.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Empty Client Dashboard
+![screenshot 1](src/images/empty_dashboard.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Find your Therapist
+![screenshot 1](src/images/therapist_list.png)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Dashboard after therapist added
+![screenshot 1](src/images/dashboard_therapist_added.png)
 
-### `npm run eject`
+### Create New Entry
+![screenshot 1](src/images/new_entry.png)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### Dashboard with Added Entry
+![screenshot 1](src/images/dashboard_entry_added.png)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### View, Edit and Delete Entries
+![screenshot 1](src/images/view_entry.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### And Many More...
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Getting Started
+- Click on the link below to open the website
+- Create a new account or use Google Sign In to sign in (Make sure to choose client or therapist when creating a new account - the website will default to a client account if option not chosen)
+- Currently the therapist experience is under development, but feel free to create an account and lookout for future releases!
+- Create new entries and keep track of your thoughts, feelings and emotions! You'll be surprised at the patterns you can unvover!
+- Look out for new realeses: more features to come as this is currently under development!
 
-## Learn More
+[Click here](https://untangle.netlify.app/) to open the deployed project.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+# Future Releases Will Include:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### 1. Fully functional therapist account where you can view your clients' entries as soon as they are posted!
+### 2. Receive an alert when one of your clients posts a journal entry.
+### 3. Analyze and look at graphical representations of patterns of thoughts, emotions and behavior.
+### 4. Added resources, tips and helpful information for clients to utilize as needed.
 
-### Code Splitting
+## Stay on the lookout!!!
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+# Author
+- [Github Profile](https://github.com/polina-g) 
+- [Twitter](https://twitter.com/ThisIsPolinaG)
+- [LinkedIn](linkedin.com/in/polina-gorbunova-71657170)
