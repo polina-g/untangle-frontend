@@ -18,19 +18,19 @@ const Login = () => {
   const [user, setUser] = useState({
     email: '',
     password: ''
-  })
+  });
 
   const handleChange = (event) => {
     setUser((prevState) => ({
       ...prevState,
       [event.target.name]: event.target.value 
     }));
-  }
+  };
 
   const handleSubmit = () => {
-    signInWithPassword(user.email, user.password)
-    history.push('/dashboard')
-  }
+    signInWithPassword(user.email, user.password);
+    history.push('/dashboard');
+  };
 
     return (
     <Box 
@@ -40,7 +40,7 @@ const Login = () => {
       }}
     >   
         <Paper sx={{width:'70%'}}>
-          <img src="https://i.imgur.com/dAi63Ss.png" width="100%" alt='drawing of two joyful people with flowers and sun in the background'/>
+          <img src='https://i.imgur.com/dAi63Ss.png' width='100%' alt='drawing of two joyful people with flowers and sun in the background'/>
         </Paper>
         <Paper 
           sx={{
@@ -55,61 +55,57 @@ const Login = () => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography
-            variant="h2"
+            variant='h2'
             color='secondary'
           >
           Log in
           </Typography>
           <Box sx={{ mt: 1 }}>
               <TextField
-                margin="normal"
+                margin='normal'
                 required
                 fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
+                id='email'
+                label='Email Address'
+                name='email'
+                autoComplete='email'
                 autoFocus
                 onChange={handleChange}
                 value={user.email}
               />
               <TextField
-                margin="normal"
+                margin='normal'
                 required
                 fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                autoComplete="current-password"
+                name='password'
+                label='Password'
+                type='password'
+                id='password'
+                autoComplete='current-password'
                 onChange={handleChange}
                 value={user.password}
               />
             </Box>
           <Button 
-          onClick={handleSubmit}
-          variant="contained"
-          color='primary'
-          size="large"
-          sx={{mb: 2, mt: 2}}
-        >
-        <LockOpenOutlinedIcon 
-          sx={{mr:3}}
-        />  
-          Log In
+            onClick={handleSubmit}
+            variant='contained'
+            color='primary'
+            size='large'
+            sx={{mb: 2, mt: 2}}
+          >
+            <LockOpenOutlinedIcon sx={{mr:3}}/>  
+            Log In
           </Button>
           OR
           <Button 
-          onClick={signIn}
-          variant="contained"
-          color='primary'
-          size="large"
-          sx={{mb: 2, mt: 2}}
-        >
-        <GoogleIcon 
-          sx={{mr:3}}
-        />  
-          Log in with Google
+            onClick={signIn}
+            variant='contained'
+            color='primary'
+            size='large'
+            sx={{mb: 2, mt: 2}}
+            >
+            <GoogleIcon sx={{mr:3}} />  
+              Log in with Google
         </Button>
       </Paper>
     </Box>

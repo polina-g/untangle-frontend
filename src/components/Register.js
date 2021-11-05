@@ -8,9 +8,9 @@ const Register = ({createClient, createTherapist, user, setClient, clientType}) 
                                                 setClient={setClient}
                                                 /> 
                               : <RegisterTherapist user={user} 
-                                                    createTherapist={createTherapist}
-                                                    setClient={setClient}
-                                                    />
+                                                   createTherapist={createTherapist}
+                                                   setClient={setClient}
+                                                   />
     );
   };
 

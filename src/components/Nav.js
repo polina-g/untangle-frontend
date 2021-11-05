@@ -15,24 +15,24 @@ import { LinkStyle } from '../styles';
 const Nav = ({user}) => {
   return (
     <Box>
-    <AppBar position='static'>
-      <Toolbar>
-        <Link to ='/'>
-          <Typography variant="h6">
-            <StyledLogo  src="https://i.imgur.com/MPEA9T2.png"/>
-          </Typography>
-        </Link>
-           { user ? 
+      <AppBar position='static'>
+        <Toolbar>
+          <Link to ='/'>
+            <Typography variant='h6'>
+              <StyledLogo  src='https://i.imgur.com/MPEA9T2.png'/>
+            </Typography>
+           </Link>
+            { user ? 
              <>
               <LinkStyle>
-                <Link to="/dashboard">
+                <Link to='/dashboard'>
                   <Button
-                    variant="contained"
+                    variant='contained'
                     color='secondary'
-                    size="large"
+                    size='large'
                     sx={{ml:3}}
                   >
-                      Dashboard
+                    Dashboard
                   </Button>
                 </Link>
               </LinkStyle>
@@ -41,7 +41,7 @@ const Nav = ({user}) => {
                     <Button 
                       variant='contained' 
                       color='secondary'
-                      size="large"
+                      size='large'
                       sx={{ml:3}}
                     >
                       New Entry
@@ -53,7 +53,7 @@ const Nav = ({user}) => {
                     <Button 
                       variant='contained' 
                       color='secondary'
-                      size="large"
+                      size='large'
                       sx={{ml:3}}
                     >
                       All Entries
@@ -61,20 +61,20 @@ const Nav = ({user}) => {
                   </Link>
                 </LinkStyle>
                 <Typography
-                    variant="h3"
-                    noWrap
-                    component="div"
-                    color='secondary'
-                    sx={{ flexGrow:1 }}
+                  variant='h3'
+                  noWrap
+                  component='div'
+                  color='secondary'
+                  sx={{ flexGrow:1 }}
                 >
-                    Untangle
+                  Untangle
                 </Typography>
-                <Avatar alt="Avatar image" src={user.photoURL} />
+                <Avatar alt='Avatar image' src={user.photoURL} />
                 <Button 
                   variant='contained' 
                   color='secondary'
                   sx={{ml:3}}
-                  size="large"
+                  size='large'
                   onClick={logOut}
                 >
                   <LogoutRoundedIcon sx={{mr:1}}/>
@@ -85,12 +85,12 @@ const Nav = ({user}) => {
              <> 
               <Box sx={{ flexGrow:1 }}></Box>
               <LinkStyle>
-                <Link to="/login">
+                <Link to='/login'>
                   <Button 
                     variant='contained' 
                     color='secondary'
                     sx={{ml:3}}
-                    size="large"
+                    size='large'
                     onClick={logOut}
                   >
                     Log In
@@ -98,24 +98,24 @@ const Nav = ({user}) => {
                 </Link>
               </LinkStyle>
               <LinkStyle>
-                <Link to="/register">
+                <Link to='/register'>
                   <Button 
                     variant='contained' 
                     color='secondary'
                     sx={{ml:3}}
-                    size="large"
+                    size='large'
                     onClick={logOut}
                   >
                     Sign Up
                   </Button>
                 </Link>
               </LinkStyle>
-             </>
-         }
-      </Toolbar>
-    </AppBar>
-  </Box>
-    );
-  };
+            </>
+          }
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
+};
 
   export default Nav;

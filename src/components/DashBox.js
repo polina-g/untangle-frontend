@@ -1,9 +1,9 @@
-import { LinkStyle, StyledBoxLinkText } from "../styles";
-import { Link } from "react-router-dom";
+import { LinkStyle, StyledBoxLinkText } from '../styles';
+import { Link } from 'react-router-dom';
 
 //Material UI imports
 import Box from '@mui/material/Box'
-import Paper from "@mui/material/Paper";
+import Paper from '@mui/material/Paper';
 
 const DashBox = ({title, link, color}) => {
     return (
@@ -24,8 +24,8 @@ const DashBox = ({title, link, color}) => {
                 <Paper 
                     elevation={10} 
                     sx={{ width: 250, height: 250, bgcolor: `${color}.light`}}
-                    >
-                    <StyledBoxLinkText className="BoxLinkText">{title}</StyledBoxLinkText>
+                >
+                    <StyledBoxLinkText className='BoxLinkText'>{title}</StyledBoxLinkText>
                 </Paper>
             </Link>
         </LinkStyle>

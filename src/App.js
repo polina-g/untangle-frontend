@@ -3,14 +3,14 @@ import {Route, Switch, Redirect } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import Nav from './components/Nav';
 import Landing from './pages/Landing'
-import LogIn from './pages/LogIn'
+import LogIn from './pages/LogIn';
 import CreateAccount from './pages/CreateAccount';
 import Dashboard from './pages/Dashboard';
 import NewEntry from './pages/NewEntry';
 import ViewEntry from './pages/ViewEntry';
 import EditEntry from './pages/EditEntry';
 import AllEntries from './pages/AllEntries';
-import Footer from './components/Footer' 
+import Footer from './components/Footer' ;
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,8 +21,8 @@ const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL, REACT_APP_THERAPIST_URL} = proc
 
 function App() {
   const [ user, setUser ] = useState(null);
-  const [ entries, setEntries ] = useState([])
-  const [ therapists, setTherapists ] = useState(null)
+  const [ entries, setEntries ] = useState([]);
+  const [ therapists, setTherapists ] = useState(null);
   const [ clientType, setClientType] = useState('client');
   const fetchData = useRef(null);
 
@@ -56,7 +56,7 @@ function App() {
     });
     const data = await response.json();
     setEntries(data);
-  }
+  };
 
   //====================== CLIENT FUNCTIONS======================= 
     const createClient = async (person) => {
@@ -75,11 +75,9 @@ function App() {
 
     //===================THERAPIST FUNCTIONS========================
     const createTherapist = async (person) => {
-      console.log('this is create therapist')
       if(!user) return;
       const data = {...person, managedBy: user.uid};
       const token = await user.getIdToken();
-      console.log(data, token);
       await fetch(REACT_APP_THERAPIST_URL, {
         method: 'POST',
         headers: {
@@ -102,7 +100,7 @@ function App() {
 
       const data = await response.json();
       setTherapists(data);
-    }
+    };
 
     //=============== ENTRY FUNCTIONS=================
     const createEntry = async (entry) => {
@@ -116,9 +114,9 @@ function App() {
           'Authorization': 'Bearer ' + token
         },
         body: JSON.stringify(data)
-      })
+      });
       getEntries();
-    }
+    };
 
     const updateEntry = async (entry, id) => {
       if(!user) return;
@@ -148,41 +146,45 @@ function App() {
 
     //=================================================
     useEffect(() => {
-      fetchData.current = getEntries
+      fetchData.current = getEntries;
     });
 
     useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged(user => {
-        setUser(user)
+        setUser(user);
         if(user) {
           fetchData.current();
         } else {
           setEntries([]);
-        }
+        };
       });
       return () => unsubscribe();
     }, [user]);
 
   return (
-    <div className="App">
+    <div className='App'>
       <CssBaseline />
       <ThemeProvider theme={theme}>
         <Nav 
           user={user} 
           data={entries}
           createEntry={createEntry}
-        />
+          />
         <Switch>
-          <Route exact path="/">
+          <Route exact path='/'>
             <Landing />
           </Route>
-          <Route path="/login" render={() => (
-              user ? <Redirect to="/dashboard" /> : <LogIn />
+          <Route path='/login' 
+                render={() => (
+              user ? <Redirect to='/dashboard' /> 
+                   : <LogIn />
             )} />
-          <Route path="/register"  render={() => (
-            user ? <Redirect to="/dashboard" /> : <CreateAccount setClientType={setClientType} />
-          )}/>
-          <Route path="/dashboard" render={() => (
+          <Route path='/register'  
+                 render={() => (
+            user ? <Redirect to='/dashboard' /> 
+                 : <CreateAccount setClientType={setClientType} />
+            )}/>
+          <Route path='/dashboard' render={() => (
             user ? 
               <Dashboard 
                 data={entries} 
@@ -194,19 +196,25 @@ function App() {
                 therapists={therapists}
                 getTherapists={getTherapists}
                 setClientType={setClientType}
-              /> : 
-              <Redirect to="/login" />
+                /> 
+                 : <Redirect to='/login' />
             )} />
-          <Route exact path="/entries">
+          <Route exact path='/entries'>
             <AllEntries data={entries}/>
           </Route>
-          <Route exact path="/entries/new">
-            <NewEntry createEntry={createEntry} user={user}/>
+          <Route exact path='/entries/new'>
+            <NewEntry createEntry={createEntry} 
+                      user={user} 
+                      />
           </Route>
-          <Route exact path="/entries/:id">
-            <ViewEntry updateEntry={updateEntry} deleteEntry={deleteEntry} user={user} data={entries}/>
+          <Route exact path='/entries/:id'>
+            <ViewEntry updateEntry={updateEntry} 
+                       deleteEntry={deleteEntry} 
+                       user={user} 
+                       data={entries}
+                       />
           </Route>
-          <Route exact path="/entries/:id/edit">
+          <Route exact path='/entries/:id/edit'>
             <EditEntry />
           </Route>
         </Switch>
@@ -214,7 +222,7 @@ function App() {
       </ThemeProvider>
     </div>
   );
-}
+};
 
 export default App;
 

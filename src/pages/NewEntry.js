@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import EntryForm from '../components/EntryForm'
 
 const NewEntry = (props) => {
@@ -17,7 +17,7 @@ const NewEntry = (props) => {
 
   useEffect(() => {
     if(props.status === 'edit') {
-      setFormState(props.data)
+      setFormState(props.data);
     }
   }, [props.status, props.data]);
 
@@ -49,8 +49,8 @@ const NewEntry = (props) => {
       situation: '',
       private: false
     });
-    history.push('/dashboard')
-  }
+    history.push('/dashboard');
+  };
 
   const handleChange = (event) => {
     const value = event.target.name === 'private' 
@@ -66,14 +66,14 @@ const NewEntry = (props) => {
     handleChange: handleChange,
     handleSubmit: handleSubmit,
     formState: formState
-  }
+  };
 
   const editProps = {
     handleChange: handleChange,
     handleSubmit: handleUpdate,
     formState: formState,
     isEdit: true
-  }
+  };
 
     return (
     <main>

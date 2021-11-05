@@ -16,7 +16,7 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
   const {id} = useParams();
   const history = useHistory();
   const [ entry, setEntry ] = useState(null);
-  const [ action, setAction ] = useState('view')
+  const [ action, setAction ] = useState('view');
   const fetchData = useRef(null);
 
   //Smiley face images:
@@ -40,33 +40,31 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
       setEntry(foundEntry);
     } else {
       loading();
-    }
+    };
   };
 
     const handleDelete = async () => {
       await deleteEntry(id);
       history.push('/dashboard');
-    }
+    };
 
   const view = () => {
     return(
       <Box
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-      sx={{width: '100%', mt: 5}}
+        display='flex'
+        justifyContent='center'
+        alignItems='center'
+        sx={{width: '100%', mt: 5}}
       >
       <Paper elevation={5} sx={{width: '70%', mb: '2rem'}}>
         <List>
           <Box
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
+            display='flex'
+            justifyContent='center'
+            alignItems='center'
           >
             <ListItem>
-              <ListItemText 
-                primary={entry.formattedDate}
-              />
+              <ListItemText  primary={entry.formattedDate} />
               <ListItemIcon>
                 <img src={images[entry.feeling-1]} alt='feeling smiley face'/>
               </ListItemIcon>
@@ -83,7 +81,7 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
           <ListItem>
             <ListItemText 
               secondary={`${entry.thought} (Rate of belief: ${entry.rob}/100)`}
-              primary="My Most Distressing Thought"
+              primary='My Most Distressing Thought'
             />
           </ListItem>
           <Divider />
@@ -127,7 +125,7 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
   const edit = () => {
     return(    
     <main>
-      <section className="editEntry">
+      <section className='editEntry'>
       <Button
             type='button'
             onClick={() => setAction('view')}
@@ -137,7 +135,7 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
           >
             Go Back
         </Button>
-        <NewEntry status="edit" data={entry} updateEntry={updateEntry} id={id}/>
+        <NewEntry status='edit' data={entry} updateEntry={updateEntry} id={id}/>
       </section>
     </main>
     );
@@ -148,15 +146,15 @@ const ViewEntry = ({updateEntry, deleteEntry, data}) => {
     return (
       <Box sx={{ width: 1000, pl: '30%', pt: 10}}>
         <Skeleton />
-        <Skeleton animation="wave" />
+        <Skeleton animation='wave' />
         <Skeleton animation={false} />
       </Box>
     );
-  }
+  };
 
   const loaded = () => {
     return action === 'view' ? view() : edit()
-  }
+  };
 
   useEffect(() => {
     fetchData.current = getEntry;

@@ -1,4 +1,4 @@
-import EntryTable from "../components/EntryTable";
+import EntryTable from '../components/EntryTable';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 
@@ -7,7 +7,7 @@ const AllEntries = ({data}) => {
       return (
         <Box sx={{ width: 300 }}>
           <Skeleton />
-          <Skeleton animation="wave" />
+          <Skeleton animation='wave' />
           <Skeleton animation={false} />
         </Box>
       );
@@ -20,7 +20,7 @@ const AllEntries = ({data}) => {
           <EntryTable data={data}/>
         </main>
       );
-    }
+    };
 
     return data ? loaded() : loading();
   };

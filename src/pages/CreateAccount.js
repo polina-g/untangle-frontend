@@ -28,7 +28,7 @@ const CreateAccount = ({setClientType}) => {
       ...prevState,
       [event.target.name]: event.target.value 
     }));
-  }
+  };
 
   const handleSubmit = () => {
     createUserWithPassword(user.email, user.password);
@@ -45,95 +45,93 @@ const CreateAccount = ({setClientType}) => {
         justifyContent: 'flex-end',
       }}
     >   
-        <Paper sx={{width:'70%'}}>
-          <img src="https://i.imgur.com/feD6gWb.jpg" width="100%" alt='smiley faces on sticky notes'/>
-        </Paper>
-        <Paper 
-          sx={{
-            p: 5,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-            flexGrow: 1
-            }}
-          >
+      <Paper sx={{width:'70%'}}>
+        <img src='https://i.imgur.com/feD6gWb.jpg' width='100%' alt='smiley faces on sticky notes'/>
+      </Paper>
+      <Paper 
+        sx={{
+          p: 5,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          flexGrow: 1
+          }}
+        >
           <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
             <LockOutlinedIcon />
           </Avatar>
           <Typography
-            variant="h2"
+            variant='h2'
             color='secondary'
           >
-          Sign Up
+            Sign Up
           </Typography>
           <Box sx={{ mt: 1 }}>
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Email Address"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={handleChange}
-                value={user.email}
-              />
-              <TextField
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Password"
-                type="password"
-                id="password"
-                onChange={handleChange}
-                value={user.password}
-              />
-            </Box>
-        <RadioGroup row > 
-          <FormControlLabel 
-            value="client" 
-            control={<Radio required={true}/>}
-            onChange={handleClientChoice}
-            label='I am a client'
-            labelPlacement='top'
-          />
-          <FormControlLabel 
-            value="therapist" 
-            control={<Radio required={true}/>}
-            onChange={handleClientChoice}
-            label='I am a Therapist'
-            labelPlacement='top'
-          />
+            <TextField
+              margin='normal'
+              required
+              fullWidth
+              id='email'
+              label='Email Address'
+              name='email'
+              autoComplete='email'
+              autoFocus
+              onChange={handleChange}
+              value={user.email}
+            />
+            <TextField
+              margin='normal'
+              required
+              fullWidth
+              name='password'
+              label='Password'
+              type='password'
+              id='password'
+              onChange={handleChange}
+              value={user.password}
+            />
+          </Box>
+          <RadioGroup row > 
+            <FormControlLabel 
+              value='client' 
+              control={<Radio required={true}/>}
+              onChange={handleClientChoice}
+              label='I am a client'
+              labelPlacement='top'
+            />
+            <FormControlLabel 
+              value='therapist' 
+              control={<Radio required={true}/>}
+              onChange={handleClientChoice}
+              label='I am a Therapist'
+              labelPlacement='top'
+            />
           </RadioGroup>
           <Button 
-          onClick={handleSubmit}
-          variant="contained"
-          color='primary'
-          size="large"
-          sx={{mb: 2, mt: 2}}
-        >
-        <PersonAddAlt1OutlinedIcon 
-          sx={{mr:3}}
-        />  
-          Create Account
+            onClick={handleSubmit}
+            variant='contained'
+            color='primary'
+            size='large'
+            sx={{mb: 2, mt: 2}}
+          >
+            <PersonAddAlt1OutlinedIcon sx={{mr:3}} />  
+            Create Account
           </Button>
+
           OR
+
           <Button 
-          onClick={signIn}
-          variant="contained"
-          color='primary'
-          size="large"
-          sx={{mb: 2, mt: 2}}
-        >
-        <GoogleIcon 
-          sx={{mr:3}}
-        />  
-          Create Account with Google
-        </Button>
-      </Paper>
-    </Box>
+            onClick={signIn}
+            variant='contained'
+            color='primary'
+            size='large'
+            sx={{mb: 2, mt: 2}}
+          >
+            <GoogleIcon sx={{mr:3}} />  
+            Create Account with Google
+          </Button>
+        </Paper>
+      </Box>
     );
   };
 
