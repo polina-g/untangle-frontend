@@ -21,9 +21,11 @@ const {REACT_APP_BASE_URL, REACT_APP_CLIENT_URL, REACT_APP_THERAPIST_URL} = proc
 
 function App() {
   const [ user, setUser ] = useState(null);
+  const [ registrationStatus, setRegistrationStatus ] = useState(null);
+  const [ typeOfUser, setTypeOfUser ] = useState('null');
   const [ entries, setEntries ] = useState([]);
-  const [ therapists, setTherapists ] = useState(null);
-  const [ clientType, setClientType] = useState('client');
+
+  // const [ therapists, setTherapists ] = useState(null);
   const fetchData = useRef(null);
 
   const theme = createTheme({
@@ -43,7 +45,43 @@ function App() {
       }
     }
   });
- 
+
+  //Registration Status
+  const checkIfClient = async () => {
+    const token = await user.getIdToken();
+    const response = await fetch(REACT_APP_CLIENT_URL+'/client', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+    const checkResult = await response.data();
+    if(checkResult.length) {
+      setRegistrationStatus(true);
+      setTypeOfUser('client');
+    } else {
+      checkIfTherapist();
+    };
+  };
+
+  const checkIfTherapist = async () => {
+    const token = await user.getIdToken();
+    const response = await fetch(REACT_APP_THERAPIST_URL+'/therapist', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    });
+    const checkResult = await response.data();
+    if(checkResult.length) {
+      setRegistrationStatus(true);
+      setTypeOfUser('therapist')
+    } else {
+      setRegistrationStatus(false)
+    };
+  };
+  
+
   //========== GET DATA ============================
   const getEntries = async () => {
     if(!user) return;
@@ -161,6 +199,12 @@ function App() {
       return () => unsubscribe();
     }, [user]);
 
+    useEffect(() => {
+      if (!registrationStatus || !typeOfUser) {
+        checkIfClient();
+      }
+    }, [registrationStatus, typeOfUser])
+
   return (
     <div className='App'>
       <CssBaseline />
@@ -182,7 +226,8 @@ function App() {
           <Route path='/register'  
                  render={() => (
             user ? <Redirect to='/dashboard' /> 
-                 : <CreateAccount setClientType={setClientType} />
+                 : <CreateAccount setTypeOfUser={setTypeOfUser}
+                                  setRegistrationStatus = {setRegistrationStatus} />
             )}/>
           <Route path='/dashboard' render={() => (
             user ? 

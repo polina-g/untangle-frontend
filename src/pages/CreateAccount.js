@@ -16,7 +16,7 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 
-const CreateAccount = ({setClientType}) => {
+const CreateAccount = ({setTypeOfUser, setRegistrationStatus}) => {
   const history = useHistory();
   const [user, setUser] = useState({
     email: '',
@@ -32,11 +32,12 @@ const CreateAccount = ({setClientType}) => {
 
   const handleSubmit = () => {
     createUserWithPassword(user.email, user.password);
+    setRegistrationStatus(false);
     history.push('/dashboard');
   };
 
   const handleClientChoice = (event) => {
-    setClientType(event.target.value);
+    setTypeOfUser(event.target.value);
   };
     return (
     <Box 

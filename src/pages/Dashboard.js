@@ -11,15 +11,7 @@ import AddTherapist from '../components/AddTherapist';
 
 const {REACT_APP_CLIENT_URL} = process.env;
 
-const Dashboard = ({user, 
-                    data, 
-                    therapists, 
-                    clientType, 
-                    setClientType, 
-                    getTherapists, 
-                    createTherapist, 
-                    createEntry, 
-                    createClient,}) => {
+const Dashboard = ({user, registration_status, type_of_user, entries}) => {
 
   const [client, setClient] = useState([]);
   const fetchData = useRef(null);
