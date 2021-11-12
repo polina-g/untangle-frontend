@@ -11,7 +11,7 @@ import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 
 
-const RegisterTherapist = ({createTherapist, user, setClient}) => {
+const RegisterTherapist = ({createTherapist, user}) => {
   const [newClient, setNewClient] = useState(user);
   const [formState, setFormState] = useState({
     acct: 'therapist',
@@ -43,7 +43,6 @@ const RegisterTherapist = ({createTherapist, user, setClient}) => {
       city: '',
       state: '',
     });
-    setClient('true');
   };
 
   useEffect(() => {

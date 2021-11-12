@@ -2,7 +2,7 @@ import EntryTable from '../components/EntryTable';
 import Skeleton from '@mui/material/Skeleton';
 import Box from '@mui/material/Box';
 
-const AllEntries = ({data}) => {
+const AllEntries = ({entries}) => {
     const loading = () => {
       return (
         <Box sx={{ width: 300 }}>
@@ -17,12 +17,12 @@ const AllEntries = ({data}) => {
       return (
         <main>
           <h1>All entries</h1>  
-          <EntryTable data={data}/>
+          <EntryTable entries={entries}/>
         </main>
       );
     };
 
-    return data ? loaded() : loading();
+    return entries ? loaded() : loading();
   };
 
   export default AllEntries;

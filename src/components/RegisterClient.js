@@ -7,7 +7,7 @@ import TextField from '@mui/material/TextField';
 import Typography from '@mui/material/Typography';
 import FormControl from '@mui/material/FormControl';
 
-const RegisterClient = ({createClient, user, setClient}) => {
+const RegisterClient = ({createClient, user}) => {
   const [newClient, setNewClient] = useState(user);
   const [formState, setFormState] = useState({
     acct: 'client',
@@ -35,7 +35,6 @@ const RegisterClient = ({createClient, user, setClient}) => {
       email: newClient.email,
       therapist: [],
     });
-    setClient('true');
   };
 
   useEffect(() => {

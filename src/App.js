@@ -14,6 +14,8 @@ import Footer from './components/Footer' ;
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 
 import { auth } from './services/firebase';
 
@@ -46,7 +48,7 @@ function App() {
     }
   });
 
-  //Registration Status
+  //User type and user registration:
   const checkIfClient = async () => {
     const token = await user.getIdToken();
     const response = await fetch(REACT_APP_CLIENT_URL+'/client', {
@@ -81,7 +83,6 @@ function App() {
     };
   };
   
-
   //========== GET DATA ============================
   const getEntries = async () => {
     if(!user) return;
@@ -124,20 +125,6 @@ function App() {
         },
         body: JSON.stringify(data)
       });
-    };
-
-    const getTherapists = async () => {
-      if(!user) return;
-      const token = await user.getIdToken();
-      const response = await fetch(REACT_APP_THERAPIST_URL, {
-        method: 'GET',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        }
-      });
-
-      const data = await response.json();
-      setTherapists(data);
     };
 
     //=============== ENTRY FUNCTIONS=================
@@ -190,11 +177,12 @@ function App() {
     useEffect(() => {
       const unsubscribe = auth.onAuthStateChanged(user => {
         setUser(user);
-        if(user) {
-          fetchData.current();
-        } else {
-          setEntries([]);
-        };
+        // TOTO: Move code below into a different into a different useEffect later
+        // if(user) {
+        //   fetchData.current();
+        // } else {
+        //   setEntries([]);
+        // };
       });
       return () => unsubscribe();
     }, [user]);
@@ -205,68 +193,78 @@ function App() {
       }
     }, [registrationStatus, typeOfUser])
 
-  return (
-    <div className='App'>
-      <CssBaseline />
-      <ThemeProvider theme={theme}>
-        <Nav 
-          user={user} 
-          data={entries}
-          createEntry={createEntry}
-          />
-        <Switch>
-          <Route exact path='/'>
-            <Landing />
-          </Route>
-          <Route path='/login' 
-                render={() => (
-              user ? <Redirect to='/dashboard' /> 
-                   : <LogIn />
-            )} />
-          <Route path='/register'  
-                 render={() => (
-            user ? <Redirect to='/dashboard' /> 
-                 : <CreateAccount setTypeOfUser={setTypeOfUser}
-                                  setRegistrationStatus = {setRegistrationStatus} />
-            )}/>
-          <Route path='/dashboard' render={() => (
-            user ? 
-              <Dashboard 
-                data={entries} 
-                createClient={createClient}
-                createTherapist={createTherapist}
-                createEntry={createEntry}
-                user={user}
-                clientType={clientType}
-                therapists={therapists}
-                getTherapists={getTherapists}
-                setClientType={setClientType}
-                /> 
-                 : <Redirect to='/login' />
-            )} />
-          <Route exact path='/entries'>
-            <AllEntries data={entries}/>
-          </Route>
-          <Route exact path='/entries/new'>
-            <NewEntry createEntry={createEntry} 
-                      user={user} 
-                      />
-          </Route>
-          <Route exact path='/entries/:id'>
-            <ViewEntry updateEntry={updateEntry} 
-                       deleteEntry={deleteEntry} 
-                       user={user} 
-                       data={entries}
-                       />
-          </Route>
-          <Route exact path='/entries/:id/edit'>
-            <EditEntry />
-          </Route>
-        </Switch>
-        <Footer />
-      </ThemeProvider>
-    </div>
-  );
+    const loading = () => {
+      return (
+        <Box sx={{ width: 1000, pl: '30%', pt: 10}}>
+          <Skeleton />
+          <Skeleton animation='wave' />
+          <Skeleton animation={false} />
+        </Box>
+      );
+    };
+
+    const loaded = () => {
+      return (
+        <div className='App'>
+          <CssBaseline />
+          <ThemeProvider theme={theme}>
+            <Nav user={user} />
+            <Switch>
+              <Route exact path='/'>
+                <Landing />
+              </Route>
+              <Route path='/login' 
+                    render={() => (
+                  user ? <Redirect to='/dashboard' /> 
+                       : <LogIn />
+                )} />
+              <Route path='/register'  
+                     render={() => (
+                user ? <Redirect to='/dashboard' /> 
+                     : <CreateAccount setTypeOfUser={setTypeOfUser}
+                                      setRegistrationStatus = {setRegistrationStatus} />
+                )}/>
+              <Route path='/dashboard' render={() => (
+                user ? 
+                  !registrationStatus ?
+                    <Register createClient={createClient}
+                              createTherapist={createTherapist}
+                              user={user}
+                              typeOfUser={typeOfUser}
+                    /> :
+                      <Dashboard 
+                        user={user}
+                        typeOfUser={typeOfUser}
+                        entries={entries}
+                        /> 
+                          : <Redirect to='/login' />
+                )} />
+              <Route exact path='/entries'>
+                <AllEntries data={entries}/>
+              </Route>
+              <Route exact path='/entries/new'>
+                <NewEntry createEntry={createEntry} 
+                          user={user} 
+                          />
+              </Route>
+              <Route exact path='/entries/:id'>
+                <ViewEntry updateEntry={updateEntry} 
+                           deleteEntry={deleteEntry} 
+                           user={user} 
+                           data={entries}
+                           />
+              </Route>
+              <Route exact path='/entries/:id/edit'>
+                <EditEntry />
+              </Route>
+            </Switch>
+            <Footer />
+          </ThemeProvider>
+        </div>
+      );
+    };
+
+  return user && registrationStatus ? loaded() : loading();
 };
 
 export default App;

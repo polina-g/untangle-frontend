@@ -12,7 +12,7 @@ import Typography from '@mui/material/Typography';
 import Box from '@mui/system/Box';
 import Skeleton from '@mui/material/Skeleton';
 
-const EntryTable = ({data, dashboard}) => {
+const EntryTable = ({entries, dashboard}) => {
   const loading = () => {
     return (
       <Box sx={{ width: 1000, pl: '30%', pt: 10}}>
@@ -73,7 +73,7 @@ const EntryTable = ({data, dashboard}) => {
 
           <TableBody>
             {
-              data.map((entry, index) => {
+              entries.map((entry, index) => {
                 if (dashboard && index > 4) return null;
                 const { createdAt, feeling, emotion, thought } = entry;
                 const date = new Date(createdAt);
@@ -111,10 +111,10 @@ const EntryTable = ({data, dashboard}) => {
   }
 
   const loaded = () => {
-    return data.length ? showEntries() : noEntries();
+    return entries.length ? showEntries() : noEntries();
   };
 
-    return data ? loaded() : loading();
+    return entries ? loaded() : loading();
   };
 
   export default EntryTable;

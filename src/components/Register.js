@@ -1,15 +1,13 @@
 import RegisterTherapist from './RegisterTherapist';
 import RegisterClient from './RegisterClient';
 
-const Register = ({createClient, createTherapist, user, setClient, clientType}) => {
+const Register = ({createClient, createTherapist, user, typeOfUser}) => {
     return (
-      clientType === 'client' ? <RegisterClient user={user} 
+      typeOfUser === 'client' ? <RegisterClient user={user} 
                                                 createClient={createClient}
-                                                setClient={setClient}
                                                 /> 
                               : <RegisterTherapist user={user} 
                                                    createTherapist={createTherapist}
-                                                   setClient={setClient}
                                                    />
     );
   };
