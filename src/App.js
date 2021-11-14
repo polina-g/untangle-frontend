@@ -5,6 +5,7 @@ import Nav from './components/Nav';
 import Landing from './pages/Landing'
 import LogIn from './pages/LogIn';
 import CreateAccount from './pages/CreateAccount';
+import Register from './components/Register'
 import Dashboard from './pages/Dashboard';
 import NewEntry from './pages/NewEntry';
 import ViewEntry from './pages/ViewEntry';
@@ -26,8 +27,8 @@ function App() {
   const [ registrationStatus, setRegistrationStatus ] = useState(null);
   const [ typeOfUser, setTypeOfUser ] = useState('null');
   const [ entries, setEntries ] = useState([]);
+  console.log('This is app', user, registrationStatus, typeOfUser, entries);
 
-  // const [ therapists, setTherapists ] = useState(null);
   const fetchData = useRef(null);
 
   const theme = createTheme({
@@ -50,15 +51,18 @@ function App() {
 
   //User type and user registration:
   const checkIfClient = async () => {
+    console.log('This is check if client');
     const token = await user.getIdToken();
+    console.log(token)
     const response = await fetch(REACT_APP_CLIENT_URL+'/client', {
       method: 'GET',
       headers: {
         'Authorization': 'Bearer ' + token
       }
     });
-    const checkResult = await response.data();
+    const checkResult = await response.json();
     if(checkResult.length) {
+      console.log('Check if client result: ', checkResult)
       setRegistrationStatus(true);
       setTypeOfUser('client');
     } else {
@@ -67,6 +71,7 @@ function App() {
   };
 
   const checkIfTherapist = async () => {
+    console.log('This is check if therapist');
     const token = await user.getIdToken();
     const response = await fetch(REACT_APP_THERAPIST_URL+'/therapist', {
       method: 'GET',
@@ -74,7 +79,8 @@ function App() {
         'Authorization': 'Bearer ' + token
       }
     });
-    const checkResult = await response.data();
+    const checkResult = await response.json();
+    console.log('check in therapist: ', checkResult)
     if(checkResult.length) {
       setRegistrationStatus(true);
       setTypeOfUser('therapist')
@@ -85,6 +91,7 @@ function App() {
   
   //========== GET DATA ============================
   const getEntries = async () => {
+    console.log('This is get entries');
     if(!user) return;
     const token = await user.getIdToken();
     const response = await fetch(REACT_APP_BASE_URL, {
@@ -178,24 +185,28 @@ function App() {
       const unsubscribe = auth.onAuthStateChanged(user => {
         setUser(user);
         // TOTO: Move code below into a different into a different useEffect later
-        // if(user) {
-        //   fetchData.current();
-        // } else {
-        //   setEntries([]);
-        // };
+        if(user) {
+          fetchData.current();
+        } else {
+          setEntries([]);
+        };
       });
       return () => unsubscribe();
     }, [user]);
 
     useEffect(() => {
-      if (!registrationStatus || !typeOfUser) {
-        checkIfClient();
+      if (user) {
+        checkIfClient()
+      } else {
+        setRegistrationStatus('false')
+        setTypeOfUser(null)
       }
-    }, [registrationStatus, typeOfUser])
+
+    }, [user])
 
     const loading = () => {
       return (
-        <Box sx={{ width: 1000, pl: '30%', pt: 10}}>
+        <Box sx={{ width: 1000, pl: '15%', pt: 10}}>
           <Skeleton />
           <Skeleton animation='wave' />
           <Skeleton animation={false} />
@@ -264,7 +275,7 @@ function App() {
       );
     };
 
-  return user && registrationStatus ? loaded() : loading();
+  return (!user || registrationStatus) ? loaded() : loading();
 };
 
 export default App;

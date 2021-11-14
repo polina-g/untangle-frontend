@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 
 
 const Dashboard = ({user, typeOfUser, entries}) => {
+  console.log('dashboard: ', typeOfUser)
   const loading = () => {
     return (
       <Box sx={{ width: 1000, pl: '30%', pt: 10}}>

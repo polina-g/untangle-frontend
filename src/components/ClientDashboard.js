@@ -1,5 +1,4 @@
 import DashBox from '../components/DashBox';
-import Register from '../components/Register';
 import EntryTable from '../components/EntryTable';
 import { useState, useEffect, useRef } from 'react';
 import { StyledDashBoardTop } from '../styles';
@@ -9,11 +8,29 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import AddTherapist from '../components/AddTherapist';
 
-const {REACT_APP_CLIENT_URL} = process.env;
+const {REACT_APP_CLIENT_URL, REACT_APP_THERAPIST_URL} = process.env;
 
 const ClientDashboard = ({user, entries}) => {
+  const [therapists, setTherapists] = useState(null)
+  const [client, setClient] = useState(null)
 
-const getTherapists = async () => {
+  const fetchTherapists = useRef(null);
+  const fetchClient = useRef(null);
+
+  const getClient = async () => {
+    if(!user) return;
+    const token = await user.getIdToken();
+    const response = await fetch(REACT_APP_CLIENT_URL+'/client', {
+        method: 'GET',
+        headers: {
+        'Authorization': 'Bearer ' + token
+        }
+    });
+    const data = await response.json();
+    setClient(data[0]);
+  }
+
+  const getTherapists = async () => {
     if(!user) return;
     const token = await user.getIdToken();
     const response = await fetch(REACT_APP_THERAPIST_URL, {
@@ -22,9 +39,9 @@ const getTherapists = async () => {
         'Authorization': 'Bearer ' + token
         }
     });
-    const data = await response.json(); //Therapists data passed to AddTherapist
+    const data = await response.json();
+    setTherapists(data);
   };
-  
 
   const addTherapist = async (id) => {
     if(!user) return;
@@ -40,6 +57,17 @@ const getTherapists = async () => {
     });
     window.location.reload();
   };
+
+  useEffect(() => {
+    fetchTherapists.current = getTherapists;
+    fetchClient.current = getClient
+  }, [])
+
+  useEffect(() => {
+    fetchTherapists.current()
+    fetchClient.current()
+  }, [therapists, client])
+
 
   const loading = () => {
     return (
@@ -59,15 +87,14 @@ const getTherapists = async () => {
           color='primary'
           sx={{mt: 5}}
         >
-        Hi {client[0].f_name}, what would you like to do today?
+        Hi, what would you like to do today?
         </Typography>
-        <AddTherapist client={client} 
-                      therapists={therapists} 
+        <AddTherapist therapists={therapists} 
                       addTherapist={addTherapist}
+                      client={client}
                       />
         <StyledDashBoardTop>
           <DashBox title='Create New Entry' 
-                   createEntry={createEntry} 
                    link='/entries/new'
                    color='success'
                    />

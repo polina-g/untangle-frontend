@@ -10,12 +10,12 @@ import MenuItem from '@mui/material/MenuItem';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 
-const AddTherapist = ({client, therapists, addTherapist}) => {
+const AddTherapist = ({therapists, addTherapist, client}) => {
   const [formState, setFormState] = useState({
     therapist: ''
   });
 
-  useEffect(() => {}, [client, therapists]);
+  // useEffect(() => {}, [therapists, client]);
 
   const noTherapists = () => {
     const handleChange = (event) => {
@@ -84,7 +84,7 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
   };
 
   const showTherapist = () => {
-    const therapistId = client[0].therapist[0];
+    const therapistId = client.therapist[0];
     const foundTherapist = therapists.find(therapist => therapist._id === therapistId);
 
     return(
@@ -132,7 +132,7 @@ const AddTherapist = ({client, therapists, addTherapist}) => {
   }
 
   const loaded = () => {
-    return client[0]?.therapist?.length ? showTherapist() : noTherapists()
+    return client.therapist.length ? showTherapist() : noTherapists()
   }
 
     return (client && therapists) ? loaded() : loading();
